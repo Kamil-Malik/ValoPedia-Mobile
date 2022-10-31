@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item
+        android:id="@+id/nav_agents"
+        android:title="@string/agent"/>
+
+    <item
+        android:id="@+id/nav_buddies"
+        android:title="@string/buddies"/>
+
+    <item
+        android:id="@+id/nav_cards"
+        android:title="@string/cards"/>
+
+    <item
+        android:id="@+id/nav_currencies"
+        android:title="@string/currencies"/>
+
+    <item
+        android:id="@+id/nav_game_mode"
+        android:title="@string/game_mode"/>
+
+    <item
+        android:id="@+id/nav_maps"
+        android:title="@string/maps"/>
+
+    <item
+        android:id="@+id/nav_seasons"
+        android:title="@string/seasons"/>
+
+    <item
+        android:id="@+id/nav_titles"
+        android:title="@string/titles"/>
+
+    <item
+        android:id="@+id/nav_weapons"
+        android:title="@string/weapons"/>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="@string/menu_home" />
+        <item
+            android:id="@+id/nav_gallery"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/menu_gallery" />
+        <item
+            android:id="@+id/nav_slideshow"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_slideshow" />
+    </group>
+</menu>

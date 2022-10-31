@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.lelestacia.valorantgamepedia.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_gallery"
+        android:name="com.lelestacia.valorantgamepedia.ui.gallery.GalleryFragment"
+        android:label="@string/menu_gallery"
+        tools:layout="@layout/fragment_gallery" />
+
+    <fragment
+        android:id="@+id/nav_slideshow"
+        android:name="com.lelestacia.valorantgamepedia.ui.slideshow.SlideshowFragment"
+        android:label="@string/menu_slideshow"
+        tools:layout="@layout/fragment_slideshow" />
+    <fragment
+        android:id="@+id/nav_agents"
+        android:name="com.lelestacia.valorantgamepedia.AgentsFragment"
+        android:label="@string/agent"
+        tools:layout="@layout/fragment_agents" />
+    <fragment
+        android:id="@+id/nav_buddies"
+        android:name="com.lelestacia.valorantgamepedia.BuddiesFragment"
+        android:label="@string/buddies"
+        tools:layout="@layout/fragment_buddies" />
+    <fragment
+        android:id="@+id/nav_cards"
+        android:name="com.lelestacia.valorantgamepedia.CardsFragment"
+        android:label="@string/cards"
+        tools:layout="@layout/fragment_cards" />
+    <fragment
+        android:id="@+id/nav_currencies"
+        android:name="com.lelestacia.valorantgamepedia.CurrenciesFragment"
+        android:label="@string/currencies"
+        tools:layout="@layout/fragment_currencies" />
+    <fragment
+        android:id="@+id/nav_game_mode"
+        android:name="com.lelestacia.valorantgamepedia.GameModeFragment"
+        android:label="@string/game_mode"
+        tools:layout="@layout/fragment_game_mode" />
+    <fragment
+        android:id="@+id/nav_maps"
+        android:name="com.lelestacia.valorantgamepedia.MapsFragment"
+        android:label="@string/maps"
+        tools:layout="@layout/fragment_maps" />
+    <fragment
+        android:id="@+id/nav_seasons"
+        android:name="com.lelestacia.valorantgamepedia.SeasonsFragment"
+        android:label="@string/seasons"
+        tools:layout="@layout/fragment_seasons" />
+    <fragment
+        android:id="@+id/nav_titles"
+        android:name="com.lelestacia.valorantgamepedia.TitlesFragment"
+        android:label="@string/titles"
+        tools:layout="@layout/fragment_titles" />
+    <fragment
+        android:id="@+id/nav_weapons"
+        android:name="com.lelestacia.valorantgamepedia.WeaponsFragment"
+        android:label="@string/weapons"
+        tools:layout="@layout/fragment_weapons" />
+</navigation>

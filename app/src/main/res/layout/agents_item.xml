@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    android:padding="8dp">
+
+    <ImageView
+        android:id="@+id/iv_agent_icon"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="8dp"
+        android:contentDescription="@string/image_of_agent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_broken_image" />
+
+    <TextView
+        android:id="@+id/tv_agent_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/sen_extrabold"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@id/iv_agent_icon"
+        app:layout_constraintTop_toTopOf="@id/iv_agent_icon"
+        tools:text="Agent Name" />
+
+    <ImageView
+        android:contentDescription="@string/image_of_agent_s_role"
+        android:id="@+id/iv_agent_role"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="@id/iv_agent_icon"
+        app:layout_constraintStart_toStartOf="@id/tv_agent_name"
+        app:layout_constraintTop_toBottomOf="@id/tv_agent_name"
+        tools:src="@drawable/ic_broken_image" />
+
+    <TextView
+        android:id="@+id/tv_agent_role_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/sen"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/iv_agent_role"
+        app:layout_constraintStart_toEndOf="@id/iv_agent_role"
+        app:layout_constraintTop_toTopOf="@id/iv_agent_role"
+        tools:text="Initiator" />
+</androidx.constraintlayout.widget.ConstraintLayout>

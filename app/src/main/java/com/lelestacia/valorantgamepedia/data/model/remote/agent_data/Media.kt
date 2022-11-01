@@ -1,4 +1,4 @@
-package com.lelestacia.valorantgamepedia.data.model.remote
+package com.lelestacia.valorantgamepedia.data.model.remote.agent_data
 
 
 import android.os.Parcelable

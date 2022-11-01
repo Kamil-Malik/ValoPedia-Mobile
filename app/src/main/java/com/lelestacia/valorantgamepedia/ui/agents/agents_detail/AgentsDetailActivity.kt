@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.lelestacia.valorantgamepedia.data.model.remote.AgentData
+import com.lelestacia.valorantgamepedia.data.model.remote.agent_data.AgentData
 import com.lelestacia.valorantgamepedia.databinding.ActivityAgentsDetailBinding
 
 class AgentsDetailActivity : AppCompatActivity() {

@@ -39,7 +39,7 @@
         tools:layout="@layout/fragment_cards" />
     <fragment
         android:id="@+id/nav_currencies"
-        android:name="com.lelestacia.valorantgamepedia.ui.CurrenciesFragment"
+        android:name="com.lelestacia.valorantgamepedia.ui.currencies.CurrenciesFragment"
         android:label="@string/currencies"
         tools:layout="@layout/fragment_currencies" />
     <fragment
@@ -64,7 +64,7 @@
         tools:layout="@layout/fragment_titles" />
     <fragment
         android:id="@+id/nav_weapons"
-        android:name="com.lelestacia.valorantgamepedia.ui.WeaponsFragment"
+        android:name="com.lelestacia.valorantgamepedia.ui.weapons.WeaponsFragment"
         android:label="@string/weapons"
         tools:layout="@layout/fragment_weapons" />
 </navigation>

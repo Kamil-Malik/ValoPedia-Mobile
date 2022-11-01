@@ -28,4 +28,6 @@
     <string name="image_of_agent">Image of Agent</string>
     <string name="image_of_agent_s_role">Image of agent\'s role</string>
     <string name="agent_ability">Agent\'s Ability</string>
+
+    <string name="weapon_category">%s - %s</string>
 </resources>

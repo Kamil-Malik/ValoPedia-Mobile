@@ -20,7 +20,6 @@ class AgentSkillAdapter : ListAdapter<Ability, AgentSkillAdapter.ViewHolder>(DIF
                     .load(item.displayIcon)
                     .placeholder(R.drawable.ic_placeholder)
                     .error(R.drawable.ic_broken_image)
-                    .override(150,150)
                     .fitCenter()
                     .into(ivAgentSkillIcon)
 

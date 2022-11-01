@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.lelestacia.valorantgamepedia.R
-import com.lelestacia.valorantgamepedia.data.model.remote.Ability
+import com.lelestacia.valorantgamepedia.data.model.remote.agent_data.Ability
 import com.lelestacia.valorantgamepedia.databinding.SkillItemBinding
 
 class AgentSkillAdapter : ListAdapter<Ability, AgentSkillAdapter.ViewHolder>(DIFF_CALLBACK) {

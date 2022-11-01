@@ -1,4 +1,4 @@
-package com.lelestacia.valorantgamepedia.data.model.remote
+package com.lelestacia.valorantgamepedia.data.model.remote.agent_data
 
 
 import android.os.Parcelable
@@ -7,8 +7,6 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Role(
-    @SerializedName("assetPath")
-    val assetPath: String,
     @SerializedName("description")
     val description: String,
     @SerializedName("displayIcon")

@@ -1,4 +1,4 @@
-package com.lelestacia.valorantgamepedia.data.model.remote
+package com.lelestacia.valorantgamepedia.data.model.remote.agent_data
 
 
 import android.os.Parcelable
@@ -9,8 +9,6 @@ import kotlinx.parcelize.Parcelize
 data class AgentData(
     @SerializedName("abilities")
     val abilities: List<Ability>,
-    @SerializedName("assetPath")
-    val background: String?,
     @SerializedName("backgroundGradientColors")
     val backgroundGradientColors: List<String>,
     @SerializedName("bustPortrait")

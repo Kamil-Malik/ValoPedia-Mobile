@@ -7,11 +7,11 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.lelestacia.valorantgamepedia.data.model.remote.currencies_data.CurrenciesData
-import com.lelestacia.valorantgamepedia.databinding.CurrenciesItemBinding
+import com.lelestacia.valorantgamepedia.databinding.ItemCurrencyBinding
 
 class CurrencyAdapter : ListAdapter<CurrenciesData, CurrencyAdapter.ViewHolder>(DIFF_CALLBACK) {
 
-    inner class ViewHolder(private val binding: CurrenciesItemBinding) :
+    inner class ViewHolder(private val binding: ItemCurrencyBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: CurrenciesData) {
@@ -27,7 +27,7 @@ class CurrencyAdapter : ListAdapter<CurrenciesData, CurrencyAdapter.ViewHolder>(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
-            CurrenciesItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemCurrencyBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 

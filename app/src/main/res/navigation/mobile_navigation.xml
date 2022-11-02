@@ -49,7 +49,7 @@
         tools:layout="@layout/fragment_game_mode" />
     <fragment
         android:id="@+id/nav_maps"
-        android:name="com.lelestacia.valorantgamepedia.ui.MapsFragment"
+        android:name="com.lelestacia.valorantgamepedia.ui.maps.MapsFragment"
         android:label="@string/maps"
         tools:layout="@layout/fragment_maps" />
     <fragment

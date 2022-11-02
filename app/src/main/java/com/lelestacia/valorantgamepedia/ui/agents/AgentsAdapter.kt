@@ -10,12 +10,12 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.lelestacia.valorantgamepedia.R
 import com.lelestacia.valorantgamepedia.data.model.remote.agent_data.AgentData
-import com.lelestacia.valorantgamepedia.databinding.AgentsItemBinding
+import com.lelestacia.valorantgamepedia.databinding.ItemAgentBinding
 import com.lelestacia.valorantgamepedia.ui.agents.agents_detail.AgentsDetailActivity
 
 class AgentsAdapter : ListAdapter<AgentData, AgentsAdapter.AgentsViewHolder>(DIFF_CALLBACK) {
 
-    inner class AgentsViewHolder(private val binding: AgentsItemBinding) :
+    inner class AgentsViewHolder(private val binding: ItemAgentBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: AgentData) {
@@ -51,7 +51,7 @@ class AgentsAdapter : ListAdapter<AgentData, AgentsAdapter.AgentsViewHolder>(DIF
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AgentsViewHolder {
-        val binding = AgentsItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemAgentBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return AgentsViewHolder(binding)
     }
 

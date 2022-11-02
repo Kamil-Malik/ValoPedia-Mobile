@@ -1,4 +1,4 @@
-package com.lelestacia.valorantgamepedia.utility
+package com.lelestacia.valorantgamepedia.data.model.remote
 
 import com.google.gson.annotations.SerializedName
 

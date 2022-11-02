@@ -3,41 +3,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <item
-        android:id="@+id/nav_agents"
-        android:title="@string/agent"/>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_agents"
+            android:icon="@drawable/agent"
+            android:title="@string/agent" />
 
-    <item
-        android:id="@+id/nav_buddies"
-        android:title="@string/buddies"/>
+        <item
+            android:id="@+id/nav_buddies"
+            android:icon="@drawable/amulet"
+            android:title="@string/buddies" />
 
-    <item
-        android:id="@+id/nav_cards"
-        android:title="@string/cards"/>
+        <item
+            android:id="@+id/nav_cards"
+            android:icon="@drawable/card"
+            android:title="@string/cards" />
 
-    <item
-        android:id="@+id/nav_currencies"
-        android:title="@string/currencies"/>
+        <item
+            android:id="@+id/nav_currencies"
+            android:icon="@drawable/dollar"
+            android:title="@string/currencies" />
 
-    <item
-        android:id="@+id/nav_game_mode"
-        android:title="@string/game_mode"/>
+        <item
+            android:id="@+id/nav_maps"
+            android:icon="@drawable/maps"
+            android:title="@string/maps" />
 
-    <item
-        android:id="@+id/nav_maps"
-        android:title="@string/maps"/>
+        <item
+            android:id="@+id/nav_titles"
+            android:icon="@drawable/badge"
+            android:title="@string/titles" />
 
-    <item
-        android:id="@+id/nav_seasons"
-        android:title="@string/seasons"/>
-
-    <item
-        android:id="@+id/nav_titles"
-        android:title="@string/titles"/>
-
-    <item
-        android:id="@+id/nav_weapons"
-        android:title="@string/weapons"/>
+        <item
+            android:id="@+id/nav_weapons"
+            android:icon="@drawable/pistol"
+            android:title="@string/weapons" />
+    </group>
 
     <group android:checkableBehavior="single">
         <item

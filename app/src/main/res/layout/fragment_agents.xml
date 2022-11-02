@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="?attr/backgroundColor"
     android:layout_height="match_parent">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -10,6 +11,6 @@
         android:layout_height="match_parent"
         android:paddingTop="8dp"
         android:paddingBottom="8dp"
-        tools:listitem="@layout/agents_item" />
+        tools:listitem="@layout/item_agent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

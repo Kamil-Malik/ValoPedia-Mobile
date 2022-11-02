@@ -10,6 +10,6 @@
         android:layout_height="match_parent"
         android:paddingTop="8dp"
         android:paddingBottom="8dp"
-        tools:listitem="@layout/weapons_item" />
+        tools:listitem="@layout/item_weapon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

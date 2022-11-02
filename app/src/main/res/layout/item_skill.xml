@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
     app:cardCornerRadius="15dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -33,6 +34,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:fontFamily="@font/sen_bold"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -45,6 +47,7 @@
             android:layout_marginStart="16dp"
             android:fontFamily="@font/sen"
             android:justificationMode="inter_word"
+            android:textColor="?android:attr/textColorPrimary"
             app:layout_constraintEnd_toEndOf="@id/tv_agent_skill_title"
             app:layout_constraintStart_toEndOf="@id/iv_agent_skill_icon"
             app:layout_constraintTop_toTopOf="@id/iv_agent_skill_icon"

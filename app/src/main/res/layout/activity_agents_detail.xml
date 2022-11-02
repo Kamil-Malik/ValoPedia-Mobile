@@ -3,69 +3,75 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".ui.agents.agents_detail.AgentsDetailActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:background="?attr/backgroundColor"
+        android:padding="16dp">
 
         <ImageView
             android:id="@+id/iv_agent_photo"
-            android:layout_width="256dp"
-            android:layout_height="233dp"
-            android:layout_marginTop="36dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:contentDescription="@string/image_of_agent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/fullportrait" />
+            tools:src="@drawable/fullportrait"
+            tools:visibility="gone" />
 
         <TextView
             android:id="@+id/tv_agent_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/sen_bold"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/sen_extrabold"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_agent_photo"
             tools:text="Fade" />
 
         <TextView
-            android:id="@+id/tv_uuid"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/sen"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_agent_name"
-            tools:text="@string/dummy_uuid" />
-
-        <TextView
             android:id="@+id/tv_agent_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="8dp"
             android:fontFamily="@font/sen"
             android:textAlignment="center"
+            android:textColor="?android:attr/textColorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_uuid"
+            app:layout_constraintTop_toBottomOf="@id/tv_agent_name"
             tools:text="@string/dummy_agent_description" />
+
+        <TextView
+            android:id="@+id/tv_header_role"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/sen_bold"
+            android:text="@string/agent_s_role"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@id/tv_agent_description"
+            app:layout_constraintTop_toBottomOf="@id/tv_agent_description" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_agent_roles"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="?attr/cardBackgroundColor"
             app:cardCornerRadius="15dp"
-            app:layout_constraintTop_toBottomOf="@id/tv_agent_description">
+            app:layout_constraintTop_toBottomOf="@id/tv_header_role">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -77,9 +83,10 @@
 
                 <ImageView
                     android:id="@+id/iv_agent_role_icon"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:layout_marginTop="16dp"
+                    android:contentDescription="@string/agent_s_role"
                     app:layout_constraintStart_toStartOf="@id/tv_agent_role_title"
                     app:layout_constraintTop_toBottomOf="@id/tv_agent_role_title"
                     tools:src="@drawable/ic_broken_image" />
@@ -91,8 +98,9 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
-                    android:fontFamily="@font/sen_bold"
-                    android:textSize="24sp"
+                    android:fontFamily="@font/sen_extrabold"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="Initiator" />
@@ -104,6 +112,7 @@
                     android:layout_marginStart="16dp"
                     android:fontFamily="@font/sen"
                     android:justificationMode="inter_word"
+                    android:textColor="?android:attr/textColorPrimary"
                     app:layout_constraintEnd_toEndOf="@id/tv_agent_role_title"
                     app:layout_constraintStart_toEndOf="@id/iv_agent_role_icon"
                     app:layout_constraintTop_toTopOf="@id/iv_agent_role_icon"
@@ -115,9 +124,10 @@
             android:id="@+id/tv_agent_ability_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:fontFamily="@font/sen_bold"
             android:text="@string/agent_ability"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@id/rv_agent_skill"
             app:layout_constraintStart_toStartOf="@id/cv_agent_roles"
@@ -127,12 +137,53 @@
             android:id="@+id/rv_agent_skill"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginTop="8dp"
             android:orientation="horizontal"
             app:layout_constraintTop_toBottomOf="@id/tv_agent_ability_header"
             tools:itemCount="1"
-            tools:listitem="@layout/skill_item" />
+            tools:listitem="@layout/item_skill" />
+
+        <TextView
+            android:id="@+id/tv_header_passive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/sen_bold"
+            android:text="@string/agent_s_passive"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="16sp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@+id/tv_agent_ability_header"
+            app:layout_constraintTop_toBottomOf="@id/rv_agent_skill" />
+
+        <TextView
+            android:id="@+id/tv_passive_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/sen_extrabold"
+            android:textColor="?android:attr/textColorPrimary"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@+id/tv_header_passive"
+            app:layout_constraintTop_toBottomOf="@id/tv_header_passive"
+            tools:text="PASSIVE SKILL" />
+
+        <TextView
+            android:id="@+id/tv_passive_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/sen"
+            android:justificationMode="inter_word"
+            android:textColor="?android:attr/textColorPrimary"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_header_passive"
+            app:layout_constraintTop_toBottomOf="@id/tv_passive_title" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_passive_description" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

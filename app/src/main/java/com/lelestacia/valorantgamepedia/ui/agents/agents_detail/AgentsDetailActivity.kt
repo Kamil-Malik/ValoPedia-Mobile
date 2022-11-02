@@ -2,6 +2,7 @@ package com.lelestacia.valorantgamepedia.ui.agents.agents_detail
 
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import android.window.OnBackInvokedDispatcher
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -25,20 +26,33 @@ class AgentsDetailActivity : AppCompatActivity() {
         val data =
             if (Build.VERSION.SDK_INT >= 33) {
                 intent.getParcelableExtra("AGENT", AgentData::class.java) as AgentData
-            }
-            else {
+            } else {
                 intent.getParcelableExtra<AgentData>("AGENT") as AgentData
             }
         val adapter = AgentSkillAdapter()
+
+        supportActionBar?.hide()
+
         binding.apply {
             rvAgentSkill.adapter = adapter
             rvAgentSkill.layoutManager =
                 LinearLayoutManager(this@AgentsDetailActivity, RecyclerView.HORIZONTAL, false)
             tvAgentName.text = data.displayName
             tvAgentDescription.text = data.description
-            tvUuid.text = data.uuid
             tvAgentRoleTitle.text = data.role?.displayName
             tvAgentRoleDescription.text = data.role?.description
+
+            if (data.abilities.filter { it.slot == "Passive" }.isNotEmpty()) {
+
+                tvPassiveTitle.visibility = View.VISIBLE
+                tvPassiveDescription.visibility = View.VISIBLE
+                tvHeaderPassive.visibility = View.VISIBLE
+
+                with(data.abilities[4]) {
+                    tvPassiveTitle.text = this.displayName
+                    tvPassiveDescription.text = this.description
+                }
+            }
 
             Glide.with(this@AgentsDetailActivity)
                 .load(data.role?.displayIcon)
@@ -50,8 +64,16 @@ class AgentsDetailActivity : AppCompatActivity() {
                 .fitCenter()
                 .into(ivAgentPhoto)
         }
-        adapter.submitList(data.abilities)
+
+        adapter.submitList(data.abilities.filterNot { it.slot == "Passive" })
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
+    }
+
+
 
     override fun getOnBackInvokedDispatcher(): OnBackInvokedDispatcher {
         finish()

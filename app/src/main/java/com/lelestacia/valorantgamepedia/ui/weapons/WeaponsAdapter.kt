@@ -9,11 +9,11 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.lelestacia.valorantgamepedia.R
 import com.lelestacia.valorantgamepedia.data.model.remote.weapons_data.weapons_info.WeaponsData
-import com.lelestacia.valorantgamepedia.databinding.WeaponsItemBinding
+import com.lelestacia.valorantgamepedia.databinding.ItemWeaponBinding
 
 class WeaponsAdapter : ListAdapter<WeaponsData, WeaponsAdapter.ViewHolder>(DIFF_CALLBACK) {
 
-    inner class ViewHolder(private val binding: WeaponsItemBinding) :
+    inner class ViewHolder(private val binding: ItemWeaponBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: WeaponsData) {
@@ -40,7 +40,7 @@ class WeaponsAdapter : ListAdapter<WeaponsData, WeaponsAdapter.ViewHolder>(DIFF_
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = WeaponsItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemWeaponBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 

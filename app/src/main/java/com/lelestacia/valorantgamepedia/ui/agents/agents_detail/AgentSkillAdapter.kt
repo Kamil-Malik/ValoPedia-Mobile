@@ -6,13 +6,14 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.lelestacia.valorantgamepedia.R
 import com.lelestacia.valorantgamepedia.data.model.remote.agent_data.Ability
-import com.lelestacia.valorantgamepedia.databinding.SkillItemBinding
+import com.lelestacia.valorantgamepedia.databinding.ItemSkillBinding
 
 class AgentSkillAdapter : ListAdapter<Ability, AgentSkillAdapter.ViewHolder>(DIFF_CALLBACK) {
 
-    inner class ViewHolder(private val binding: SkillItemBinding) :
+    inner class ViewHolder(private val binding: ItemSkillBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Ability) {
             binding.apply {
@@ -20,6 +21,7 @@ class AgentSkillAdapter : ListAdapter<Ability, AgentSkillAdapter.ViewHolder>(DIF
                     .load(item.displayIcon)
                     .placeholder(R.drawable.ic_placeholder)
                     .error(R.drawable.ic_broken_image)
+                    .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                     .fitCenter()
                     .into(ivAgentSkillIcon)
 
@@ -30,7 +32,7 @@ class AgentSkillAdapter : ListAdapter<Ability, AgentSkillAdapter.ViewHolder>(DIF
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = SkillItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemSkillBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 

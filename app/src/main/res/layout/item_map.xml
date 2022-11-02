@@ -4,43 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp">
+    android:background="@android:color/transparent"
+    android:padding="8dp">
 
     <ImageView
-        android:id="@+id/iv_weapon_icon"
+        android:id="@+id/iv_map_list_icon"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/dummy_weapon" />
+        android:contentDescription="@string/maps"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_weapon_title"
+        android:id="@+id/tv_map_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/sen_bold"
+        android:textColor="?android:attr/textColorPrimary"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_weapon_icon"
-        tools:text="Odin" />
+        app:layout_constraintTop_toBottomOf="@id/iv_map_list_icon"
+        tools:text="Ascent" />
 
     <TextView
-        android:id="@+id/tv_weapon_category"
+        android:id="@+id/tv_map_coordinate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/sen"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_weapon_title"
-        tools:text="Heavy" />
-
-    <TextView
-        android:id="@+id/tv_weapon_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16sp"
-        android:fontFamily="@font/sen_bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_weapon_icon"
-        tools:text="600K" />
+        android:textColor="?android:attr/textColorPrimary"
+        app:layout_constraintStart_toStartOf="@id/tv_map_name"
+        app:layout_constraintTop_toBottomOf="@id/tv_map_name"
+        tools:text="test" />
 </androidx.constraintlayout.widget.ConstraintLayout>

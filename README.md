@@ -15,4 +15,10 @@ Material yang digunakan :
 - GSON Converter
 - Glide
 
+Fitur yang telah tersedia :
+- Halaman daftar karakter beserta detail
+- Halaman daftar currency
+- Halaman daftar peta
+- Halaman daftar 
+
 Silahkan fork repository ini jika ingin membantu saya dalam pengembangan aplikasi. Silahkan hubungi saya melalui [Whatsapp](https://wa.me/6282259997760). Link G-Drive klik [disini](https://drive.google.com/drive/folders/1Z-vIRXdQyG4TgLc245YIropwSWGC9Y7x?usp=share_link)

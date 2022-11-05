@@ -7,10 +7,6 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class WeaponsData(
-    @SerializedName("category")
-    val category: String,
-    @SerializedName("defaultSkinUuid")
-    val defaultSkinUuid: String,
     @SerializedName("displayIcon")
     val displayIcon: String,
     @SerializedName("displayName")

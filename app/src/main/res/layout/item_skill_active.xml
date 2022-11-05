@@ -25,7 +25,8 @@
             android:contentDescription="@string/image_of_agent"
             app:layout_constraintStart_toStartOf="@id/tv_agent_skill_title"
             app:layout_constraintTop_toBottomOf="@id/tv_agent_skill_slot"
-            tools:src="@drawable/ic_broken_image" />
+            tools:src="@drawable/ic_broken_image"
+            app:tint="?iconTint" />
 
         <TextView
             android:id="@+id/tv_agent_skill_title"

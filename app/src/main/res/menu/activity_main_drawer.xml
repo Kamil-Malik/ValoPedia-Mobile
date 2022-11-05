@@ -26,11 +26,6 @@
             android:title="@string/maps" />
 
         <item
-            android:id="@+id/nav_titles"
-            android:icon="@drawable/badge"
-            android:title="@string/titles" />
-
-        <item
             android:id="@+id/nav_weapons"
             android:icon="@drawable/pistol"
             android:title="@string/weapons" />

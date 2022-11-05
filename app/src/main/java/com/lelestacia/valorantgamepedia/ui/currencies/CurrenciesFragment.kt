@@ -28,6 +28,7 @@ class CurrenciesFragment : Fragment() {
 
         val adapter = CurrencyAdapter()
         binding.apply {
+            rvCurrency.setHasFixedSize(true)
             rvCurrency.adapter = adapter
             rvCurrency.layoutManager = GridLayoutManager(context, 3)
         }

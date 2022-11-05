@@ -33,6 +33,7 @@ class AgentsDetailActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         binding.apply {
+            rvAgentSkill.setHasFixedSize(true)
             rvAgentSkill.adapter = adapter
             rvAgentSkill.layoutManager =
                 LinearLayoutManager(this@AgentsDetailActivity, RecyclerView.HORIZONTAL, false)

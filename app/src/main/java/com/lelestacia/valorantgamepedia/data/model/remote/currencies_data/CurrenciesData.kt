@@ -4,8 +4,6 @@ package com.lelestacia.valorantgamepedia.data.model.remote.currencies_data
 import com.google.gson.annotations.SerializedName
 
 data class CurrenciesData(
-    @SerializedName("assetPath")
-    val assetPath: String,
     @SerializedName("displayIcon")
     val displayIcon: String,
     @SerializedName("displayName")

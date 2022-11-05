@@ -39,7 +39,8 @@
         app:layout_constraintBottom_toBottomOf="@id/iv_agent_icon"
         app:layout_constraintStart_toStartOf="@id/tv_agent_name"
         app:layout_constraintTop_toBottomOf="@id/tv_agent_name"
-        tools:src="@drawable/ic_broken_image" />
+        tools:src="@drawable/ic_broken_image"
+        app:tint="?iconTint" />
 
     <TextView
         android:id="@+id/tv_agent_role_title"

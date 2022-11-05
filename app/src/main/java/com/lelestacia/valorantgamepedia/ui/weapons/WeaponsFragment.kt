@@ -28,6 +28,7 @@ class WeaponsFragment : Fragment() {
 
         val adapter = WeaponsAdapter()
         binding.apply {
+            rvWeapon.setHasFixedSize(true)
             rvWeapon.adapter = adapter
             rvWeapon.layoutManager = LinearLayoutManager(context)
         }

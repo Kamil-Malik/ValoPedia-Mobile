@@ -19,7 +19,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:contentDescription="@string/weapons"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/odin" />
 
         <TextView
             android:id="@+id/tv_weapon_title"
@@ -52,10 +53,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintTop_toBottomOf="@id/tv_weapon_header_stat"
-            tools:itemCount="2"
+            app:spanCount="2"
+            tools:itemCount="6"
             tools:listitem="@layout/item_weapon_stat" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_weapon_damage_range"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/rv_weapon_stat"
+            app:spanCount="4"
+            tools:itemCount="4"
+            tools:listitem="@layout/item_weapon_damage" />
 
         <TextView
             android:id="@+id/tv_header_weapon_skin"
@@ -67,14 +82,18 @@
             android:textColor="?android:attr/textColorPrimary"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="@id/rv_weapon_stat"
-            app:layout_constraintTop_toBottomOf="@id/rv_weapon_stat" />
+            app:layout_constraintTop_toBottomOf="@id/rv_weapon_damage_range" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_weapon_skin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintTop_toBottomOf="@id/tv_header_weapon_skin"
+            app:spanCount="3"
+            tools:itemCount="9"
             tools:listitem="@layout/item_weapon_skin" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

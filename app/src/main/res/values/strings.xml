@@ -40,10 +40,11 @@
 
 
 
-    //Utility Componen
+    //Utility Component
     <string name="standard_weapon_skin">Standard %s</string>
     <string name="random_weapon_skin">Random</string>
     <string name="dashboard">Dashboard</string>
     <string name="fire_rate">Fire Rate</string>
     <string name="weapon_skin">Weapon Skin</string>
+    <string name="rank">Rank</string>
 </resources>

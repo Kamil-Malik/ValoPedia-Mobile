@@ -11,7 +11,7 @@ import com.lelestacia.valorantgamepedia.R
 import com.lelestacia.valorantgamepedia.data.model.remote.agent_data.Ability
 import com.lelestacia.valorantgamepedia.databinding.ItemSkillActiveBinding
 import com.lelestacia.valorantgamepedia.databinding.ItemSkillPassiveBinding
-import com.lelestacia.valorantgamepedia.utility.SkillType
+import com.lelestacia.valorantgamepedia.usecases.SkillType
 
 class AgentSkillAdapter : ListAdapter<Ability, ViewHolder>(DIFF_CALLBACK) {
 

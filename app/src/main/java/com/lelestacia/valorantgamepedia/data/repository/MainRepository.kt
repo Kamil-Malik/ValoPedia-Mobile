@@ -9,11 +9,11 @@ import kotlinx.coroutines.flow.Flow
 
 interface MainRepository {
 
-    fun getAgents() : Flow<FinalResponse<List<AgentData>>>
+    fun getAgents(): Flow<FinalResponse<List<AgentData>>>
 
-    fun getCurrencies() : Flow<FinalResponse<List<CurrenciesData>>>
+    fun getCurrencies(): Flow<FinalResponse<List<CurrenciesData>>>
 
-    fun getMaps() : Flow<FinalResponse<List<MapsData>>>
+    fun getMaps(): Flow<FinalResponse<List<MapsData>>>
 
-    fun getWeapons() : Flow<FinalResponse<List<WeaponsData>>>
+    fun getWeapons(): Flow<FinalResponse<List<WeaponsData>>>
 }

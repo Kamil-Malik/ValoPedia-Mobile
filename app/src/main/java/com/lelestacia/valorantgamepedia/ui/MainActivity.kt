@@ -35,16 +35,9 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.nav_home,
-                R.id.nav_gallery,
-                R.id.nav_slideshow,
                 R.id.nav_agents,
-                R.id.nav_buddies,
-                R.id.nav_cards,
                 R.id.nav_currencies,
-                R.id.nav_game_mode,
                 R.id.nav_maps,
-                R.id.nav_seasons,
-                R.id.nav_titles,
                 R.id.nav_weapons
             ), drawerLayout
         )

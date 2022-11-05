@@ -28,6 +28,7 @@ class MapsFragment : Fragment() {
 
         val adapter = MapsAdapter()
         binding.apply {
+            rvMaps.setHasFixedSize(true)
             rvMaps.adapter = adapter
             rvMaps.layoutManager = LinearLayoutManager(context)
         }

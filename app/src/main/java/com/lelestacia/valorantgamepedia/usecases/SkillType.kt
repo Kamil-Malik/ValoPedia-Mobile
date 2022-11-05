@@ -1,4 +1,4 @@
-package com.lelestacia.valorantgamepedia.utility
+package com.lelestacia.valorantgamepedia.usecases
 
 class SkillType {
 

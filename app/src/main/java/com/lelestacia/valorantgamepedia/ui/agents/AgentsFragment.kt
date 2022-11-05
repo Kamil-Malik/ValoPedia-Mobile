@@ -26,9 +26,12 @@ class AgentsFragment : Fragment() {
     ): View {
         _binding = FragmentAgentsBinding.inflate(inflater, container, false)
         val adapter = AgentsAdapter()
+        binding.apply {
+            rvAgents.setHasFixedSize(true)
+            rvAgents.adapter = adapter
+            rvAgents.layoutManager = LinearLayoutManager(context)
+        }
 
-        binding.rvAgents.adapter = adapter
-        binding.rvAgents.layoutManager = LinearLayoutManager(context)
         viewModel.getAgents().observe(viewLifecycleOwner){
             when(it){
                 is FinalResponse.GenericException -> Toast.makeText(

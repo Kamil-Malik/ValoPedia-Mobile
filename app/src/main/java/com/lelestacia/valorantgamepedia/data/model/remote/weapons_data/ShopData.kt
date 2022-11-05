@@ -1,8 +1,11 @@
-package com.lelestacia.valorantgamepedia.data.model.remote.weapons_data.weapons_info
+package com.lelestacia.valorantgamepedia.data.model.remote.weapons_data
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class ShopData(
     @SerializedName("assetPath")
     val assetPath: String,
@@ -16,10 +19,6 @@ data class ShopData(
     val cost: Int,
     @SerializedName("gridPosition")
     val gridPosition: GridPosition?,
-    @SerializedName("image")
-    val image: Any?,
     @SerializedName("newImage")
-    val newImage: String,
-    @SerializedName("newImage2")
-    val newImage2: Any?
-)
+    val newImage: String
+): Parcelable

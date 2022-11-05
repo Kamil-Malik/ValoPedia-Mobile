@@ -22,9 +22,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/sen_bold"
+        android:textAlignment="center"
         android:textColor="?android:attr/textColorPrimary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/iv_currency_icon"
+        app:layout_constraintStart_toStartOf="@+id/iv_currency_icon"
         app:layout_constraintTop_toBottomOf="@id/iv_currency_icon"
         tools:text="VP" />
 </androidx.constraintlayout.widget.ConstraintLayout>

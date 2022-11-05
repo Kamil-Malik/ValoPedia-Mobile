@@ -5,7 +5,7 @@ import com.lelestacia.valorantgamepedia.data.local.MemoryCache
 import com.lelestacia.valorantgamepedia.data.model.remote.agent_data.AgentData
 import com.lelestacia.valorantgamepedia.data.model.remote.currencies_data.CurrenciesData
 import com.lelestacia.valorantgamepedia.data.model.remote.maps_data.MapsData
-import com.lelestacia.valorantgamepedia.data.model.remote.weapons_data.weapons_info.WeaponsData
+import com.lelestacia.valorantgamepedia.data.model.remote.weapons_data.WeaponsData
 import com.lelestacia.valorantgamepedia.utility.FinalResponse
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.*

@@ -56,7 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:fontFamily="@font/sen_bold"
-            android:text="@string/agent_s_role"
+            android:text="@string/agent_role"
             android:textColor="?android:attr/textColorPrimary"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="@id/tv_agent_description"
@@ -86,7 +86,7 @@
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_marginTop="16dp"
-                    android:contentDescription="@string/agent_s_role"
+                    android:contentDescription="@string/agent_role"
                     app:layout_constraintStart_toStartOf="@id/tv_agent_role_title"
                     app:layout_constraintTop_toBottomOf="@id/tv_agent_role_title"
                     tools:src="@drawable/ic_broken_image" />
@@ -141,49 +141,11 @@
             android:orientation="horizontal"
             app:layout_constraintTop_toBottomOf="@id/tv_agent_ability_header"
             tools:itemCount="1"
-            tools:listitem="@layout/item_skill" />
-
-        <TextView
-            android:id="@+id/tv_header_passive"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:fontFamily="@font/sen_bold"
-            android:text="@string/agent_s_passive"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textSize="16sp"
-            android:visibility="gone"
-            app:layout_constraintStart_toStartOf="@+id/tv_agent_ability_header"
-            app:layout_constraintTop_toBottomOf="@id/rv_agent_skill" />
-
-        <TextView
-            android:id="@+id/tv_passive_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/sen_extrabold"
-            android:textColor="?android:attr/textColorPrimary"
-            android:visibility="gone"
-            app:layout_constraintStart_toStartOf="@+id/tv_header_passive"
-            app:layout_constraintTop_toBottomOf="@id/tv_header_passive"
-            tools:text="PASSIVE SKILL" />
-
-        <TextView
-            android:id="@+id/tv_passive_description"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/sen"
-            android:justificationMode="inter_word"
-            android:textColor="?android:attr/textColorPrimary"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/tv_header_passive"
-            app:layout_constraintTop_toBottomOf="@id/tv_passive_title" />
+            tools:listitem="@layout/item_skill_active" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="24dp"
-            app:layout_constraintTop_toBottomOf="@id/tv_passive_description" />
+            app:layout_constraintTop_toBottomOf="@id/rv_agent_skill" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

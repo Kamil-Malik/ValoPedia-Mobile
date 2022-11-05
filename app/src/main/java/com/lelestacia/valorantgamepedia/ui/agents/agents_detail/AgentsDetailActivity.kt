@@ -2,7 +2,6 @@ package com.lelestacia.valorantgamepedia.ui.agents.agents_detail
 
 import android.os.Build
 import android.os.Bundle
-import android.view.View
 import android.window.OnBackInvokedDispatcher
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -42,18 +41,6 @@ class AgentsDetailActivity : AppCompatActivity() {
             tvAgentRoleTitle.text = data.role?.displayName
             tvAgentRoleDescription.text = data.role?.description
 
-            if (data.abilities.filter { it.slot == "Passive" }.isNotEmpty()) {
-
-                tvPassiveTitle.visibility = View.VISIBLE
-                tvPassiveDescription.visibility = View.VISIBLE
-                tvHeaderPassive.visibility = View.VISIBLE
-
-                with(data.abilities[4]) {
-                    tvPassiveTitle.text = this.displayName
-                    tvPassiveDescription.text = this.description
-                }
-            }
-
             Glide.with(this@AgentsDetailActivity)
                 .load(data.role?.displayIcon)
                 .fitCenter()
@@ -65,15 +52,8 @@ class AgentsDetailActivity : AppCompatActivity() {
                 .into(ivAgentPhoto)
         }
 
-        adapter.submitList(data.abilities.filterNot { it.slot == "Passive" })
+        adapter.submitList(data.abilities)
     }
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-        finish()
-    }
-
-
 
     override fun getOnBackInvokedDispatcher(): OnBackInvokedDispatcher {
         finish()

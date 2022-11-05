@@ -4,17 +4,19 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.lelestacia.valorantgamepedia.R
 import com.lelestacia.valorantgamepedia.data.model.remote.agent_data.Ability
-import com.lelestacia.valorantgamepedia.databinding.ItemSkillBinding
+import com.lelestacia.valorantgamepedia.databinding.ItemSkillActiveBinding
+import com.lelestacia.valorantgamepedia.databinding.ItemSkillPassiveBinding
+import com.lelestacia.valorantgamepedia.utility.SkillType
 
-class AgentSkillAdapter : ListAdapter<Ability, AgentSkillAdapter.ViewHolder>(DIFF_CALLBACK) {
+class AgentSkillAdapter : ListAdapter<Ability, ViewHolder>(DIFF_CALLBACK) {
 
-    inner class ViewHolder(private val binding: ItemSkillBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    class ViewHolderActive(private val binding: ItemSkillActiveBinding) :
+        ViewHolder(binding.root) {
         fun bind(item: Ability) {
             binding.apply {
                 Glide.with(itemView.context)
@@ -26,23 +28,54 @@ class AgentSkillAdapter : ListAdapter<Ability, AgentSkillAdapter.ViewHolder>(DIF
                     .into(ivAgentSkillIcon)
 
                 tvAgentSkillTitle.text = item.displayName
+                tvAgentSkillSlot.text = SkillType().get(item.slot)
                 tvAgentSkillDescription.text = item.description
             }
         }
     }
 
+    class ViewHolderPassive(private val binding: ItemSkillPassiveBinding) :
+        ViewHolder(binding.root) {
+
+        fun bind(item: Ability) {
+            binding.apply {
+                tvAgentSkillTitle.text = item.displayName
+                tvAgentSkillDescription.text = item.description
+                tvAgentSkillSlot.text = SkillType().get(item.slot)
+            }
+        }
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        val skillType = SkillType().get(getItem(position).slot)
+        return if (skillType == "Passive Skill") {
+            PASSIVE_SKILL
+        } else {
+            ACTIVE_SKILL
+        }
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemSkillBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ViewHolder(binding)
+        return if (viewType == PASSIVE_SKILL) {
+            val binding = ItemSkillPassiveBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ViewHolderPassive(binding)
+        } else {
+            val binding =
+                ItemSkillActiveBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ViewHolderActive(binding)
+        }
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = getItem(position)
-        if (item != null)
-            holder.bind(item)
+        if (holder.itemViewType == PASSIVE_SKILL) {
+            (holder as ViewHolderPassive).bind(getItem(position))
+        } else {
+            (holder as ViewHolderActive).bind(getItem(position))
+        }
     }
 
     companion object {
+
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Ability>() {
             override fun areItemsTheSame(oldItem: Ability, newItem: Ability): Boolean {
                 return oldItem == newItem
@@ -52,5 +85,7 @@ class AgentSkillAdapter : ListAdapter<Ability, AgentSkillAdapter.ViewHolder>(DIF
                 return oldItem.slot == newItem.slot
             }
         }
+        private const val ACTIVE_SKILL = 1
+        private const val PASSIVE_SKILL = 2
     }
 }

@@ -16,16 +16,6 @@
         android:paddingEnd="8dp"
         android:paddingBottom="16dp">
 
-        <ImageView
-            android:id="@+id/iv_agent_skill_icon"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="16dp"
-            android:contentDescription="@string/image_of_agent"
-            app:layout_constraintStart_toStartOf="@id/tv_agent_skill_title"
-            app:layout_constraintTop_toBottomOf="@id/tv_agent_skill_title"
-            tools:src="@drawable/ic_broken_image" />
-
         <TextView
             android:id="@+id/tv_agent_skill_title"
             android:layout_width="match_parent"
@@ -41,16 +31,28 @@
             tools:text="Initiator" />
 
         <TextView
+            android:id="@+id/tv_agent_skill_slot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/sen_bold"
+            android:textColor="?android:attr/textColorPrimary"
+            app:layout_constraintStart_toStartOf="@id/tv_agent_skill_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_agent_skill_title"
+            tools:text="Ultimate" />
+
+        <TextView
             android:id="@+id/tv_agent_skill_description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:fontFamily="@font/sen"
             android:justificationMode="inter_word"
             android:textColor="?android:attr/textColorPrimary"
             app:layout_constraintEnd_toEndOf="@id/tv_agent_skill_title"
-            app:layout_constraintStart_toEndOf="@id/iv_agent_skill_icon"
-            app:layout_constraintTop_toTopOf="@id/iv_agent_skill_icon"
+            app:layout_constraintStart_toStartOf="@+id/tv_agent_skill_slot"
+            app:layout_constraintTop_toBottomOf="@id/tv_agent_skill_slot"
+            tools:layout_editor_absoluteY="77dp"
             tools:text="@string/dummy_role_description" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.lelestacia.valorantgamepedia.R
 import com.lelestacia.valorantgamepedia.databinding.FragmentAgentsBinding
 import com.lelestacia.valorantgamepedia.utility.FinalResponse
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,13 +33,13 @@ class AgentsFragment : Fragment() {
             when(it){
                 is FinalResponse.GenericException -> Toast.makeText(
                     context,
-                    "Error ${it.code} - ${it.cause}",
+                    getString(R.string.error_http, it.code, it.cause),
                     Toast.LENGTH_SHORT
                 ).show()
                 FinalResponse.Loading -> Unit
                 FinalResponse.IoException -> Toast.makeText(
                     context,
-                    "Silahkan cek koneksi",
+                    getString(R.string.error_connection),
                     Toast.LENGTH_SHORT
                 ).show()
                 is FinalResponse.Success -> adapter.submitList(it.data)

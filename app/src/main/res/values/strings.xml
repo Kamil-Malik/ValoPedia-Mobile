@@ -19,7 +19,6 @@
     <string name="seasons">Seasons</string>
     <string name="titles">Titles</string>
     <string name="weapons">Weapons</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="this_tab_is_under_development_please_wait_for_further_information">This tab is under development, please wait for further information</string>
     <string name="dummy_role_description">Initiators challenge angles by setting up their team to enter contested ground and push defenders away.</string>
@@ -30,8 +29,21 @@
     <string name="agent_ability">Agent\'s Ability</string>
 
     <string name="weapon_category">%s - %s</string>
-    <string name="agent_s_passive">Agent\'s Passive</string>
-    <string name="agent_s_role">Agent\'s Role</string>
+    <string name="agent_passive">Agent\'s Passive</string>
+    <string name="agent_role">Agent\'s Role</string>
     <string name="weapon_stat">Weapon Stat</string>
     <string name="rate_of_fire">Rate of fire\t\t:</string>
+
+    <string name="error_connection">Please check your connection</string>
+    <string name="error_http">Error %d - %s</string>
+
+
+
+
+    //Utility Componen
+    <string name="standard_weapon_skin">Standard %s</string>
+    <string name="random_weapon_skin">Random</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="fire_rate">Fire Rate</string>
+    <string name="weapon_skin">Weapon Skin</string>
 </resources>

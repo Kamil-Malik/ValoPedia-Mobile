@@ -1,8 +1,11 @@
-package com.lelestacia.valorantgamepedia.data.model.remote.weapons_data.weapons_info
+package com.lelestacia.valorantgamepedia.data.model.remote.weapons_data
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class DamageRange(
     @SerializedName("bodyDamage")
     val bodyDamage: Int,
@@ -14,4 +17,4 @@ data class DamageRange(
     val rangeEndMeters: Int,
     @SerializedName("rangeStartMeters")
     val rangeStartMeters: Int
-)
+) : Parcelable

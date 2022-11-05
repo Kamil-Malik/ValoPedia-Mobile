@@ -1,8 +1,11 @@
-package com.lelestacia.valorantgamepedia.data.model.remote.weapons_data.weapons_info
+package com.lelestacia.valorantgamepedia.data.model.remote.weapons_data
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class WeaponsData(
     @SerializedName("category")
     val category: String,
@@ -22,4 +25,4 @@ data class WeaponsData(
     val uuid: String,
     @SerializedName("weaponStats")
     val weaponStats: WeaponStats?
-)
+): Parcelable

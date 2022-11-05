@@ -1,5 +1,6 @@
 package com.lelestacia.valorantgamepedia.ui.weapons
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -8,8 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.lelestacia.valorantgamepedia.R
-import com.lelestacia.valorantgamepedia.data.model.remote.weapons_data.weapons_info.WeaponsData
+import com.lelestacia.valorantgamepedia.data.model.remote.weapons_data.WeaponsData
 import com.lelestacia.valorantgamepedia.databinding.ItemWeaponBinding
+import com.lelestacia.valorantgamepedia.ui.weapons.weapons_detail.DetailWeaponActivity
 
 class WeaponsAdapter : ListAdapter<WeaponsData, WeaponsAdapter.ViewHolder>(DIFF_CALLBACK) {
 
@@ -35,6 +37,14 @@ class WeaponsAdapter : ListAdapter<WeaponsData, WeaponsAdapter.ViewHolder>(DIFF_
                     item.shopData.cost.toString()
                 }
                 tvWeaponPrice.text = cost
+
+                root.setOnClickListener {
+                    with(itemView.context) {
+                        startActivity(Intent(this, DetailWeaponActivity::class.java).also {
+                            it.putExtra("WEAPON", item)
+                        })
+                    }
+                }
             }
         }
     }

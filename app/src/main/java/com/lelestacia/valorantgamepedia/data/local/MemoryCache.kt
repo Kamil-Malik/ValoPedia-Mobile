@@ -7,11 +7,11 @@ import com.lelestacia.valorantgamepedia.data.model.remote.weapons_data.WeaponsDa
 
 object MemoryCache {
 
-    val agents : MutableList<AgentData> = mutableListOf()
+    val agents: MutableList<AgentData> = mutableListOf()
 
-    val currencies : MutableList<CurrenciesData> = mutableListOf()
+    val currencies: MutableList<CurrenciesData> = mutableListOf()
 
-    val maps : MutableList<MapsData> = mutableListOf()
+    val maps: MutableList<MapsData> = mutableListOf()
 
-    val weapons : MutableList<WeaponsData> = mutableListOf()
+    val weapons: MutableList<WeaponsData> = mutableListOf()
 }

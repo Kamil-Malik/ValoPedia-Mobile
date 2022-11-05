@@ -2,6 +2,7 @@ package com.lelestacia.valorantgamepedia.ui.weapons.weapons_detail
 
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -10,7 +11,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.lelestacia.valorantgamepedia.R
 import com.lelestacia.valorantgamepedia.data.model.remote.weapons_data.WeaponsData
 import com.lelestacia.valorantgamepedia.databinding.ActivityDetailWeaponBinding
-import com.lelestacia.valorantgamepedia.utility.WeaponStat
+import com.lelestacia.valorantgamepedia.usecases.WeaponDamageRange
+import com.lelestacia.valorantgamepedia.usecases.WeaponStat
 
 class DetailWeaponActivity : AppCompatActivity() {
 
@@ -24,6 +26,7 @@ class DetailWeaponActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         val weaponStatAdapter = WeaponStatAdapter()
+        val weaponDamageAdapter = WeaponDamageAdapter()
         val weaponSkinAdapter = WeaponSkinAdapter()
 
         val weapon = if (Build.VERSION.SDK_INT >= 33) {
@@ -34,19 +37,41 @@ class DetailWeaponActivity : AppCompatActivity() {
 
         binding.apply {
 
-            rvWeaponStat.adapter = weaponStatAdapter
-            rvWeaponStat.layoutManager = object : GridLayoutManager(
-                this@DetailWeaponActivity,
-                2,
-                RecyclerView.VERTICAL,
-                false
-            ) {
+            if (weapon.weaponStats != null) {
+                rvWeaponStat.setHasFixedSize(true)
+                rvWeaponStat.adapter = weaponStatAdapter
+                rvWeaponStat.layoutManager = object : GridLayoutManager(
+                    this@DetailWeaponActivity,
+                    2,
+                    RecyclerView.VERTICAL,
+                    false
+                ) {
 
-                override fun canScrollVertically(): Boolean {
-                    return false
+                    override fun canScrollVertically(): Boolean {
+                        return false
+                    }
                 }
+
+                rvWeaponDamageRange.setHasFixedSize(true)
+                rvWeaponDamageRange.adapter = weaponDamageAdapter
+                rvWeaponDamageRange.layoutManager = object : GridLayoutManager(
+                    this@DetailWeaponActivity,
+                    weapon.weaponStats.damageRanges.size + 1,
+                    RecyclerView.VERTICAL,
+                    false
+                ) {
+                    override fun canScrollVertically(): Boolean {
+                        return false
+                    }
+                }
+            } else {
+                tvWeaponHeaderStat.visibility = View.GONE
+                rvWeaponStat.visibility = View.GONE
+                rvWeaponDamageRange.visibility = View.GONE
             }
 
+
+            rvWeaponSkin.setHasFixedSize(true)
             rvWeaponSkin.adapter = weaponSkinAdapter
             rvWeaponSkin.layoutManager =
                 GridLayoutManager(this@DetailWeaponActivity, 3, RecyclerView.HORIZONTAL, false)
@@ -58,6 +83,8 @@ class DetailWeaponActivity : AppCompatActivity() {
                 .error(R.drawable.ic_broken_image)
                 .into(ivWeaponIcon)
             tvWeaponTitle.text = weapon.displayName
+
+
             val fixedList = weapon.skins
                 .filter { it.displayIcon != null }
                 .filter {
@@ -68,11 +95,13 @@ class DetailWeaponActivity : AppCompatActivity() {
                 }
                 .filterNot { it.displayName.contains("Random") }
                 .sortedBy { it.displayName }
-
             weaponSkinAdapter.submitList(fixedList)
 
-            if (weapon.weaponStats != null)
+            if (weapon.weaponStats != null) {
                 weaponStatAdapter.submitList(WeaponStat().get(weapon.weaponStats))
+                val weaponDamageRangeValue = WeaponDamageRange().get(weapon.weaponStats.damageRanges)
+                weaponDamageAdapter.submitList(weaponDamageRangeValue)
+            }
         }
     }
 

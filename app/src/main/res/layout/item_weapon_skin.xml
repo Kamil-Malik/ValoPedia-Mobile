@@ -11,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:contentDescription="@string/weapons"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/odin" />
 
     <TextView
         android:id="@+id/tv_weapon_skin_title"

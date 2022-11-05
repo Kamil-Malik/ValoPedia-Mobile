@@ -1,4 +1,4 @@
-package com.lelestacia.valorantgamepedia.utility
+package com.lelestacia.valorantgamepedia.usecases
 
 import com.lelestacia.valorantgamepedia.data.model.local.WeaponDisplayStat
 import com.lelestacia.valorantgamepedia.data.model.remote.weapons_data.WeaponStats

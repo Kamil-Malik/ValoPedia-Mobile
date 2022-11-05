@@ -9,26 +9,18 @@ import kotlinx.parcelize.Parcelize
 data class AgentData(
     @SerializedName("abilities")
     val abilities: List<Ability>,
-    @SerializedName("backgroundGradientColors")
-    val backgroundGradientColors: List<String>,
     @SerializedName("bustPortrait")
     val bustPortrait: String?,
     @SerializedName("characterTags")
     val characterTags: List<String>?,
     @SerializedName("description")
     val description: String,
-    @SerializedName("developerName")
-    val developerName: String,
     @SerializedName("displayIcon")
     val displayIcon: String,
-    @SerializedName("displayIconSmall")
-    val displayIconSmall: String,
     @SerializedName("displayName")
     val displayName: String,
     @SerializedName("fullPortrait")
     val fullPortrait: String?,
-    @SerializedName("isAvailableForTest")
-    val isAvailableForTest: Boolean,
     @SerializedName("isPlayableCharacter")
     val isPlayableCharacter: Boolean,
     @SerializedName("killfeedPortrait")

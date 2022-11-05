@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp">
+
+    <TextView
+        android:id="@+id/tv_header_damage"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_25sdp"
+        android:fontFamily="@font/sen_bold"
+        android:gravity="bottom|center"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="@dimen/_10sdp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="0-32m" />
+
+    <TextView
+        android:id="@+id/tv_head_damage"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_25sdp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/sen_extrabold"
+        android:gravity="center"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="@dimen/_15sdp"
+        app:layout_constraintTop_toBottomOf="@id/tv_header_damage"
+        tools:text="69" />
+
+    <TextView
+        android:id="@+id/tv_body_damage"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_25sdp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/sen_extrabold"
+        android:gravity="center"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="@dimen/_15sdp"
+        app:layout_constraintTop_toBottomOf="@id/tv_head_damage"
+        tools:text="69" />
+
+    <TextView
+        android:id="@+id/tv_leg_damage"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_25sdp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/sen_extrabold"
+        android:gravity="center"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="@dimen/_15sdp"
+        app:layout_constraintTop_toBottomOf="@id/tv_body_damage"
+        tools:text="69" />
+</androidx.constraintlayout.widget.ConstraintLayout>

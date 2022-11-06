@@ -1,12 +1,12 @@
 # ValoPedia Mobile
 
-Repositori ini berisikan pengembangan sebuah aplikasi mobile berbasis Android dengan menggunakan Bahasa Pemrograman Kotlin, yang bertujuan untuk menyajikan data-data dari game Valorant (menjadi tempat melihat informasi) dengan memanfaatkan API yang telah disediakan oleh komunitas, yaitu [VALORANT API](https://valorant-api.com/).
+This repository contains the development of an Android-based mobile application using the Kotlin Programming Language, which aims to present data from the Valorant game (to be a place to view information) by utilizing the API provided by the community, namely the [VALORANT API](https://valorant-api.com/).
 
-Kebutuhan aplikasi :
-- Minimal SDK 26
-- Sistem Operasi Android
+Application requirements :
+- Minimum SDK 26
+- Android Operating System
 
-Material yang digunakan :
+Materials used :
 - Dagger Hilt
 - GSON Converter
 - Glide
@@ -16,16 +16,4 @@ Material yang digunakan :
 - Retrofit
 - [Valorant API](https://valorant-api.com/)
 
-Fitur yang telah tersedia :
-- Halaman daftar karakter beserta detail
-- Halaman daftar mata uang
-- Halaman daftar peta
-- Halaman daftar senjata beserta detail
-
-Fitur yang direncanakan :
-- Halaman dashboard yang berisikan berita dan leaderboard
-- Profil yang disesuaikan dengan akun pengguna
-- Halaman setting
-- Halaman profil yang menampilkan match terakhir dan profil pengguna
-
-Silahkan fork repository ini jika ingin membantu saya dalam pengembangan aplikasi. Silahkan hubungi saya melalui [Whatsapp](https://wa.me/6282259997760). Link G-Drive klik [disini](https://drive.google.com/drive/folders/1Z-vIRXdQyG4TgLc245YIropwSWGC9Y7x?usp=share_link)
+Please fork this repository if you want to help me in application development. Please contact me via [Whatsapp](https://wa.me/6282259997760). For G-Drive link click [here](https://drive.google.com/drive/folders/1Z-vIRXdQyG4TgLc245YIropwSWGC9Y7x?usp=share_link)

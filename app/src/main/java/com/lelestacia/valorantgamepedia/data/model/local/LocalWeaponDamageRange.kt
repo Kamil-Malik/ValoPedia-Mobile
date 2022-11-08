@@ -1,6 +1,6 @@
 package com.lelestacia.valorantgamepedia.data.model.local
 
-data class WeaponDamageStat(
+data class LocalWeaponDamageRange(
     val range: String,
     val headDamage: String,
     val bodyDamage: String,

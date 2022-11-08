@@ -4,12 +4,13 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.lelestacia.valorantgamepedia.R
-import com.lelestacia.valorantgamepedia.data.model.remote.weapons_data.WeaponsData
+import com.lelestacia.valorantgamepedia.data.model.remote.weapons_data.NetworkWeaponData
 import com.lelestacia.valorantgamepedia.databinding.ActivityDetailWeaponBinding
 import com.lelestacia.valorantgamepedia.usecases.WeaponDamageRange
 import com.lelestacia.valorantgamepedia.usecases.WeaponStat
@@ -30,14 +31,15 @@ class DetailWeaponActivity : AppCompatActivity() {
         val weaponSkinAdapter = WeaponSkinAdapter()
 
         val weapon = if (Build.VERSION.SDK_INT >= 33) {
-            intent.getParcelableExtra("WEAPON", WeaponsData::class.java) as WeaponsData
+            intent.getParcelableExtra("WEAPON", NetworkWeaponData::class.java) as NetworkWeaponData
         } else {
-            intent.getParcelableExtra<WeaponsData>("WEAPON") as WeaponsData
+            intent.getParcelableExtra<NetworkWeaponData>("WEAPON") as NetworkWeaponData
         }
-
+        
+        window.statusBarColor = ContextCompat.getColor(this, android.R.color.black)
         binding.apply {
 
-            if (weapon.weaponStats != null) {
+            if (weapon.networkWeaponStat != null) {
                 rvWeaponStat.setHasFixedSize(true)
                 rvWeaponStat.adapter = weaponStatAdapter
                 rvWeaponStat.layoutManager = object : GridLayoutManager(
@@ -56,7 +58,7 @@ class DetailWeaponActivity : AppCompatActivity() {
                 rvWeaponDamageRange.adapter = weaponDamageAdapter
                 rvWeaponDamageRange.layoutManager = object : GridLayoutManager(
                     this@DetailWeaponActivity,
-                    weapon.weaponStats.damageRanges.size + 1,
+                    weapon.networkWeaponStat.damageRanges.size + 1,
                     RecyclerView.VERTICAL,
                     false
                 ) {
@@ -97,9 +99,9 @@ class DetailWeaponActivity : AppCompatActivity() {
                 .sortedBy { it.displayName }
             weaponSkinAdapter.submitList(fixedList)
 
-            if (weapon.weaponStats != null) {
-                weaponStatAdapter.submitList(WeaponStat().get(weapon.weaponStats))
-                val weaponDamageRangeValue = WeaponDamageRange().get(weapon.weaponStats.damageRanges)
+            if (weapon.networkWeaponStat != null) {
+                weaponStatAdapter.submitList(WeaponStat().get(weapon.networkWeaponStat))
+                val weaponDamageRangeValue = WeaponDamageRange().get(weapon.networkWeaponStat.damageRanges)
                 weaponDamageAdapter.submitList(weaponDamageRangeValue)
             }
         }

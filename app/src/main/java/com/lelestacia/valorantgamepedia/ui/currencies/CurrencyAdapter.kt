@@ -6,15 +6,16 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.lelestacia.valorantgamepedia.data.model.remote.currencies_data.CurrenciesData
+import com.lelestacia.valorantgamepedia.data.model.remote.currencies_data.NetworkCurrencyData
 import com.lelestacia.valorantgamepedia.databinding.ItemCurrencyBinding
 
-class CurrencyAdapter : ListAdapter<CurrenciesData, CurrencyAdapter.ViewHolder>(DIFF_CALLBACK) {
+class CurrencyAdapter :
+    ListAdapter<NetworkCurrencyData, CurrencyAdapter.ViewHolder>(DIFF_CALLBACK) {
 
     inner class ViewHolder(private val binding: ItemCurrencyBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: CurrenciesData) {
+        fun bind(item: NetworkCurrencyData) {
             binding.apply {
                 Glide.with(itemView.context)
                     .load(item.displayIcon)
@@ -32,23 +33,21 @@ class CurrencyAdapter : ListAdapter<CurrenciesData, CurrencyAdapter.ViewHolder>(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = getItem(position)
-        if (item != null)
-            holder.bind(item)
+        holder.bind(getItem(position))
     }
 
     companion object {
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<CurrenciesData>() {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<NetworkCurrencyData>() {
             override fun areItemsTheSame(
-                oldItem: CurrenciesData,
-                newItem: CurrenciesData
+                oldItem: NetworkCurrencyData,
+                newItem: NetworkCurrencyData
             ): Boolean {
                 return oldItem.uuid == newItem.uuid
             }
 
             override fun areContentsTheSame(
-                oldItem: CurrenciesData,
-                newItem: CurrenciesData
+                oldItem: NetworkCurrencyData,
+                newItem: NetworkCurrencyData
             ): Boolean {
                 return oldItem == newItem
             }

@@ -1,49 +1,49 @@
 package com.lelestacia.valorantgamepedia.usecases
 
-import com.lelestacia.valorantgamepedia.data.model.local.WeaponDisplayStat
-import com.lelestacia.valorantgamepedia.data.model.remote.weapons_data.WeaponStats
+import com.lelestacia.valorantgamepedia.data.model.local.LocalWeaponStat
+import com.lelestacia.valorantgamepedia.data.model.remote.weapons_data.NetworkWeaponStat
 
 class WeaponStat {
 
-    fun get(stat: WeaponStats): List<WeaponDisplayStat> {
-        val arr = arrayListOf<WeaponDisplayStat>()
+    fun get(stat: NetworkWeaponStat): List<LocalWeaponStat> {
+        val arr = arrayListOf<LocalWeaponStat>()
         arr.add(
-            WeaponDisplayStat(
+            LocalWeaponStat(
                 title = "Fire Rate",
                 value = stat.fireRate.toString(),
                 calculation = RDSS
             )
         )
         arr.add(
-            WeaponDisplayStat(
+            LocalWeaponStat(
                 title = "Run Speed",
                 value = stat.runSpeedMultiplier.toString(),
                 calculation = MSEC
             )
         )
         arr.add(
-            WeaponDisplayStat(
+            LocalWeaponStat(
                 title = "Equip Speed",
                 value = stat.equipTimeSeconds.toString(),
                 calculation = SEC
             )
         )
         arr.add(
-            WeaponDisplayStat(
+            LocalWeaponStat(
                 title = "1St Shot Spread",
                 value = stat.firstBulletAccuracy.toString(),
                 calculation = DEG
             )
         )
         arr.add(
-            WeaponDisplayStat(
+            LocalWeaponStat(
                 title = "Reload Speed",
                 value = stat.reloadTimeSeconds.toString(),
                 calculation = SEC
             )
         )
         arr.add(
-            WeaponDisplayStat(
+            LocalWeaponStat(
                 title = "Magazine",
                 value = stat.magazineSize.toString(),
                 calculation = RDS

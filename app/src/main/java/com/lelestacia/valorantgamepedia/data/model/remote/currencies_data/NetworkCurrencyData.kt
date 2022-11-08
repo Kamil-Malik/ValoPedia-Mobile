@@ -3,7 +3,7 @@ package com.lelestacia.valorantgamepedia.data.model.remote.currencies_data
 
 import com.google.gson.annotations.SerializedName
 
-data class CurrenciesData(
+data class NetworkCurrencyData(
     @SerializedName("displayIcon")
     val displayIcon: String,
     @SerializedName("displayName")

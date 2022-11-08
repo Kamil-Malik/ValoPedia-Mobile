@@ -9,32 +9,26 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.lelestacia.valorantgamepedia.R
-import com.lelestacia.valorantgamepedia.data.model.remote.agent_data.AgentData
+import com.lelestacia.valorantgamepedia.data.model.remote.agent_data.RemoteAgentData
 import com.lelestacia.valorantgamepedia.databinding.ItemAgentBinding
 import com.lelestacia.valorantgamepedia.ui.agents.agents_detail.AgentsDetailActivity
 
-class AgentsAdapter : ListAdapter<AgentData, AgentsAdapter.AgentsViewHolder>(DIFF_CALLBACK) {
+class AgentsAdapter : ListAdapter<RemoteAgentData, AgentsAdapter.AgentsViewHolder>(DIFF_CALLBACK) {
 
     inner class AgentsViewHolder(private val binding: ItemAgentBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: AgentData) {
+        fun bind(item: RemoteAgentData) {
             binding.apply {
-                Glide.with(itemView.context)
-                    .load(item.displayIcon)
+                Glide.with(itemView.context).load(item.displayIcon)
                     .placeholder(R.drawable.ic_placeholder)
                     .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
-                    .error(R.drawable.ic_broken_image)
-                    .fitCenter()
-                    .into(ivAgentIcon)
+                    .error(R.drawable.ic_broken_image).fitCenter().into(ivAgentIcon)
 
-                Glide.with(itemView.context)
-                    .load(item.role?.displayIcon)
+                Glide.with(itemView.context).load(item.role?.displayIcon)
                     .placeholder(R.drawable.ic_placeholder)
                     .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
-                    .error(R.drawable.ic_broken_image)
-                    .fitCenter()
-                    .into(ivAgentRole)
+                    .error(R.drawable.ic_broken_image).fitCenter().into(ivAgentRole)
 
                 tvAgentName.text = item.displayName
                 tvAgentRoleTitle.text = item.role?.displayName ?: "Empty Role"
@@ -56,18 +50,20 @@ class AgentsAdapter : ListAdapter<AgentData, AgentsAdapter.AgentsViewHolder>(DIF
     }
 
     override fun onBindViewHolder(holder: AgentsViewHolder, position: Int) {
-        val item = getItem(position)
-        if (item != null)
-            holder.bind(item)
+        holder.bind(getItem(position))
     }
 
     companion object {
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<AgentData>() {
-            override fun areItemsTheSame(oldItem: AgentData, newItem: AgentData): Boolean {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<RemoteAgentData>() {
+            override fun areItemsTheSame(
+                oldItem: RemoteAgentData, newItem: RemoteAgentData
+            ): Boolean {
                 return oldItem == newItem
             }
 
-            override fun areContentsTheSame(oldItem: AgentData, newItem: AgentData): Boolean {
+            override fun areContentsTheSame(
+                oldItem: RemoteAgentData, newItem: RemoteAgentData
+            ): Boolean {
                 return oldItem.uuid == newItem.uuid
             }
 

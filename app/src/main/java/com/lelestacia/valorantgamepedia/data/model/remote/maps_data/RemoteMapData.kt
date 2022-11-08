@@ -6,25 +6,23 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class MapsData(
-    @SerializedName("assetPath")
-    val assetPath: String,
+data class RemoteMapData(
     @SerializedName("callouts")
     val callouts: List<Callout>?,
     @SerializedName("coordinates")
-    val coordinates: String,
+    val networkMapCoordinate: String,
     @SerializedName("displayIcon")
-    val displayIcon: String?,
+    val networkMapDisplayIcon: String?,
     @SerializedName("displayName")
-    val displayName: String,
+    val networkMapDisplayName: String,
     @SerializedName("listViewIcon")
-    val listViewIcon: String,
+    val networkMapListIcon: String,
     @SerializedName("mapUrl")
-    val mapUrl: String,
+    val networkMapURL: String,
     @SerializedName("splash")
-    val splash: String,
+    val networkMapSplash: String,
     @SerializedName("uuid")
-    val uuid: String,
+    val networkMapUUID: String,
     @SerializedName("xMultiplier")
     val xMultiplier: Double,
     @SerializedName("xScalarToAdd")
@@ -33,4 +31,4 @@ data class MapsData(
     val yMultiplier: Double,
     @SerializedName("yScalarToAdd")
     val yScalarToAdd: Double
-): Parcelable
+) : Parcelable

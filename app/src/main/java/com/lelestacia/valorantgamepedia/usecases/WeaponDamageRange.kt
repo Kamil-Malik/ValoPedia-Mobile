@@ -1,14 +1,14 @@
 package com.lelestacia.valorantgamepedia.usecases
 
-import com.lelestacia.valorantgamepedia.data.model.local.WeaponDamageStat
+import com.lelestacia.valorantgamepedia.data.model.local.LocalWeaponDamageRange
 import com.lelestacia.valorantgamepedia.data.model.remote.weapons_data.DamageRange
 
 class WeaponDamageRange {
 
-    fun get(rawData: List<DamageRange>): List<WeaponDamageStat> {
-        val arr = arrayListOf<WeaponDamageStat>()
+    fun get(rawData: List<DamageRange>): List<LocalWeaponDamageRange> {
+        val arr = arrayListOf<LocalWeaponDamageRange>()
         arr.add(
-            WeaponDamageStat(
+            LocalWeaponDamageRange(
                 range = "Damage",
                 headDamage = "Head",
                 bodyDamage = "Body",
@@ -18,7 +18,7 @@ class WeaponDamageRange {
 
         rawData.forEach {
             arr.add(
-                WeaponDamageStat(
+                LocalWeaponDamageRange(
                     range = "${it.rangeStartMeters} - ${it.rangeEndMeters}m",
                     headDamage = String.format("%.2f", it.headDamage.toFloat()),
                     bodyDamage = String.format("%.2f", it.bodyDamage.toFloat()),

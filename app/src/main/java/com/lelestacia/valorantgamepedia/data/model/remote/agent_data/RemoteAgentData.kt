@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class AgentData(
+data class RemoteAgentData(
     @SerializedName("abilities")
     val abilities: List<Ability>,
     @SerializedName("bustPortrait")
@@ -31,4 +31,4 @@ data class AgentData(
     val uuid: String,
     @SerializedName("voiceLine")
     val voiceLine: VoiceLine
-): Parcelable
+) : Parcelable

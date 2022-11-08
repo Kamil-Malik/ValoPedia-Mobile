@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class WeaponsData(
+data class NetworkWeaponData(
     @SerializedName("displayIcon")
     val displayIcon: String,
     @SerializedName("displayName")
@@ -20,5 +20,5 @@ data class WeaponsData(
     @SerializedName("uuid")
     val uuid: String,
     @SerializedName("weaponStats")
-    val weaponStats: WeaponStats?
+    val networkWeaponStat: NetworkWeaponStat?
 ): Parcelable

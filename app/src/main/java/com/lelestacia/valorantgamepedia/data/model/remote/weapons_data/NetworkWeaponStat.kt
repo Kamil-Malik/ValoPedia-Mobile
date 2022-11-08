@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class WeaponStats(
+data class NetworkWeaponStat(
     @SerializedName("adsStats")
     val adsStats: AdsStats?,
     @SerializedName("airBurstStats")

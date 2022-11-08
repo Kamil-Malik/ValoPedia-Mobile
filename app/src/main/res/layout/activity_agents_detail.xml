@@ -51,16 +51,44 @@
             tools:text="@string/dummy_agent_description" />
 
         <TextView
-            android:id="@+id/tv_header_role"
+            android:id="@+id/tv_header_tag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
+            android:fontFamily="@font/sen_bold"
+            android:text="@string/agent_tag"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@id/tv_agent_description"
+            app:layout_constraintTop_toBottomOf="@id/tv_agent_description" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_agent_tag"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/tv_header_tag"
+            tools:itemCount="3"
+            tools:listitem="@layout/item_agent_tag" />
+
+        <Space
+            android:id="@+id/spacer_tag"
+            android:layout_width="match_parent"
+            android:layout_height="16dp"
+            app:layout_constraintTop_toBottomOf="@id/rv_agent_tag" />
+
+        <TextView
+            android:id="@+id/tv_header_role"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:fontFamily="@font/sen_bold"
             android:text="@string/agent_role"
             android:textColor="?android:attr/textColorPrimary"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="@id/tv_agent_description"
-            app:layout_constraintTop_toBottomOf="@id/tv_agent_description" />
+            app:layout_constraintTop_toBottomOf="@id/spacer_tag" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_agent_roles"
@@ -89,8 +117,8 @@
                     android:contentDescription="@string/agent_role"
                     app:layout_constraintStart_toStartOf="@id/tv_agent_role_title"
                     app:layout_constraintTop_toBottomOf="@id/tv_agent_role_title"
-                    tools:src="@drawable/ic_broken_image"
-                    app:tint="?iconTint" />
+                    app:tint="?iconTint"
+                    tools:src="@drawable/ic_broken_image" />
 
                 <TextView
                     android:id="@+id/tv_agent_role_title"

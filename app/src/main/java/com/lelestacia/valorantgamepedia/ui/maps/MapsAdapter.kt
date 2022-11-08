@@ -8,25 +8,25 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.lelestacia.valorantgamepedia.R
-import com.lelestacia.valorantgamepedia.data.model.remote.maps_data.MapsData
+import com.lelestacia.valorantgamepedia.data.model.local.maps_data.LocalMapData
 import com.lelestacia.valorantgamepedia.databinding.ItemMapBinding
 
-class MapsAdapter : ListAdapter<MapsData, MapsAdapter.ViewHolder>(DIFF_CALLBACK) {
+class MapsAdapter : ListAdapter<LocalMapData, MapsAdapter.ViewHolder>(DIFF_CALLBACK) {
 
     inner class ViewHolder(private val binding: ItemMapBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: MapsData) {
+        fun bind(item: LocalMapData) {
             binding.apply {
                 Glide.with(itemView.context)
-                    .load(item.listViewIcon)
+                    .load(item.localMapListIcon)
                     .placeholder(R.drawable.ic_placeholder)
                     .error(R.drawable.ic_broken_image)
                     .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                     .into(ivMapListIcon)
 
-                tvMapName.text = item.displayName
-                tvMapCoordinate.text = item.coordinates
+                tvMapName.text = item.localMapDisplayName
+                tvMapCoordinate.text = item.localMapCoordinate
             }
         }
     }
@@ -43,12 +43,12 @@ class MapsAdapter : ListAdapter<MapsData, MapsAdapter.ViewHolder>(DIFF_CALLBACK)
     }
 
     companion object {
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<MapsData>() {
-            override fun areItemsTheSame(oldItem: MapsData, newItem: MapsData): Boolean {
-                return oldItem.uuid == newItem.uuid
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<LocalMapData>() {
+            override fun areItemsTheSame(oldItem: LocalMapData, newItem: LocalMapData): Boolean {
+                return oldItem.localMapUUID == newItem.localMapUUID
             }
 
-            override fun areContentsTheSame(oldItem: MapsData, newItem: MapsData): Boolean {
+            override fun areContentsTheSame(oldItem: LocalMapData, newItem: LocalMapData): Boolean {
                 return oldItem == newItem
             }
         }

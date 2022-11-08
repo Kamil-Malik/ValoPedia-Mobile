@@ -9,34 +9,25 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.lelestacia.valorantgamepedia.R
-import com.lelestacia.valorantgamepedia.data.model.remote.weapons_data.WeaponsData
-import com.lelestacia.valorantgamepedia.databinding.ItemWeaponBinding
+import com.lelestacia.valorantgamepedia.data.model.remote.weapons_data.NetworkWeaponData
+import com.lelestacia.valorantgamepedia.databinding.ItemWeaponGridBinding
 import com.lelestacia.valorantgamepedia.ui.weapons.weapons_detail.DetailWeaponActivity
 
-class WeaponsAdapter : ListAdapter<WeaponsData, WeaponsAdapter.ViewHolder>(DIFF_CALLBACK) {
+class WeaponGridAdapter :
+    ListAdapter<NetworkWeaponData, WeaponGridAdapter.ViewHolder>(DIFF_CALLBACK) {
 
-    inner class ViewHolder(private val binding: ItemWeaponBinding) :
+    inner class ViewHolder(private val binding: ItemWeaponGridBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: WeaponsData) {
+        fun bind(item: NetworkWeaponData) {
             binding.apply {
                 Glide.with(itemView.context)
                     .load(item.displayIcon)
+                    .placeholder(R.drawable.ic_placeholder)
                     .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                    .error(R.drawable.ic_broken_image)
                     .into(ivWeaponIcon)
-
                 tvWeaponTitle.text = item.displayName
-                tvWeaponCategory.text = itemView.context.getString(
-                    R.string.weapon_category,
-                    item.shopData?.category ?: "",
-                    item.shopData?.categoryText ?: ""
-                )
-                val cost: String = if (item.shopData?.cost == null || item.shopData.cost == 0) {
-                    "Non Purchasable"
-                } else {
-                    item.shopData.cost.toString()
-                }
-                tvWeaponPrice.text = cost
 
                 root.setOnClickListener {
                     with(itemView.context) {
@@ -50,23 +41,21 @@ class WeaponsAdapter : ListAdapter<WeaponsData, WeaponsAdapter.ViewHolder>(DIFF_
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemWeaponBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemWeaponGridBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = getItem(position)
-        if (item != null)
-            holder.bind(item)
+        holder.bind(getItem(position))
     }
 
     companion object {
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<WeaponsData>() {
-            override fun areItemsTheSame(oldItem: WeaponsData, newItem: WeaponsData): Boolean {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<NetworkWeaponData>() {
+            override fun areItemsTheSame(oldItem: NetworkWeaponData, newItem: NetworkWeaponData): Boolean {
                 return oldItem.uuid == newItem.uuid
             }
 
-            override fun areContentsTheSame(oldItem: WeaponsData, newItem: WeaponsData): Boolean {
+            override fun areContentsTheSame(oldItem: NetworkWeaponData, newItem: NetworkWeaponData): Boolean {
                 return oldItem == newItem
             }
         }

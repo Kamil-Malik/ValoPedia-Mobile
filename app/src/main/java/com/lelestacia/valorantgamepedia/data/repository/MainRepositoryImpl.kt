@@ -1,14 +1,15 @@
 package com.lelestacia.valorantgamepedia.data.repository
 
-import com.lelestacia.valorantgamepedia.data.api.ValorantApi
 import com.lelestacia.valorantgamepedia.data.local.LocalDatabase
 import com.lelestacia.valorantgamepedia.data.local.MemoryCache
 import com.lelestacia.valorantgamepedia.data.model.local.agent_data.LocalAgentData
 import com.lelestacia.valorantgamepedia.data.model.local.maps_data.LocalMapData
-import com.lelestacia.valorantgamepedia.data.model.mapper.NetworkToLocal
-import com.lelestacia.valorantgamepedia.data.model.remote.agent_data.RemoteAgentData
+import com.lelestacia.valorantgamepedia.data.model.mapper.ConvertAbility
+import com.lelestacia.valorantgamepedia.data.model.mapper.ConvertAgent
+import com.lelestacia.valorantgamepedia.data.model.mapper.ConvertMap
 import com.lelestacia.valorantgamepedia.data.model.remote.currencies_data.NetworkCurrencyData
 import com.lelestacia.valorantgamepedia.data.model.remote.weapons_data.NetworkWeaponData
+import com.lelestacia.valorantgamepedia.data.remote.ValorantApiSource
 import com.lelestacia.valorantgamepedia.utility.FinalResponse
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.*
@@ -17,7 +18,7 @@ import java.io.IOException
 import javax.inject.Inject
 
 class MainRepositoryImpl @Inject constructor(
-    private val apiService: ValorantApi,
+    private val apiService: ValorantApiSource,
     private val coroutineDispatcher: CoroutineDispatcher,
     localDatabase: LocalDatabase
 ) : MainRepository {
@@ -26,23 +27,23 @@ class MainRepositoryImpl @Inject constructor(
     private val mapDao = localDatabase.mapDao()
     private val agentDao = localDatabase.agentDao()
 
-    override fun getAgents(): Flow<FinalResponse<List<RemoteAgentData>>> {
-        return flow<FinalResponse<List<RemoteAgentData>>> {
-//            var localAgent = emptyList<LocalAgentData>()
-//            if (localAgent.isEmpty()) {
-//                val apiResponse = apiService.getAgents().data
-//                localAgent = NetworkToLocal().convertAgentResponse(apiResponse, coroutineDispatcher)
-//                    .onEach { agentDao.insert(it) }
-//                emit(FinalResponse.Success(apiResponse))
-//            } else {
-//                emit(FinalResponse.Success(localAgent))
-//                val apiResponse = apiService.getAgents().data
-//                localAgent = NetworkToLocal().convertAgentResponse(apiResponse, coroutineDispatcher)
-//                    .onEach { agentDao.insert(it) }
-//            }
-//            emit(FinalResponse.Success(localAgent))
-            val apiResponse = apiService.getAgents().data
-            emit(FinalResponse.Success(apiResponse))
+    override fun getAgents(): Flow<FinalResponse<List<LocalAgentData>>> {
+        return flow<FinalResponse<List<LocalAgentData>>> {
+            var localAgents = agentDao.getListOfAgents()
+            localAgents =
+                if (localAgents.isEmpty()) {
+                    val apiResponse = apiService.getAgents()
+                    ConvertAbility().execute(apiResponse, coroutineDispatcher)
+                        .onEach { agentDao.insertAbility(it) }
+                    ConvertAgent().execute(apiResponse).onEach { agentDao.insertAgent(it) }
+                } else {
+                    emit(FinalResponse.Success(localAgents))
+                    val apiResponse = apiService.getAgents()
+                    ConvertAbility().execute(apiResponse, coroutineDispatcher)
+                        .onEach { agentDao.insertAbility(it) }
+                    ConvertAgent().execute(apiResponse).onEach { agentDao.insertAgent(it) }
+                }
+            emit(FinalResponse.Success(localAgents))
         }.flowOn(coroutineDispatcher).onStart {
             emit(FinalResponse.Loading)
         }.catch {
@@ -58,7 +59,7 @@ class MainRepositoryImpl @Inject constructor(
         return flow<FinalResponse<List<NetworkCurrencyData>>> {
             if (memoryCache.currencies.isEmpty()) {
                 val apiResponse = apiService.getCurrencies()
-                memoryCache.currencies.addAll(apiResponse.data.sortedBy { it.displayName })
+                memoryCache.currencies.addAll(apiResponse)
             }
             emit(FinalResponse.Success(memoryCache.currencies))
         }.flowOn(coroutineDispatcher).onStart { emit(FinalResponse.Loading) }.catch {
@@ -73,20 +74,21 @@ class MainRepositoryImpl @Inject constructor(
     override fun getMaps(): Flow<FinalResponse<List<LocalMapData>>> {
         return flow<FinalResponse<List<LocalMapData>>> {
             var localMaps = mapDao.getMap()
-            if (localMaps.isEmpty()) {
-                val apiResponse = apiService.getMaps().data
-                localMaps = NetworkToLocal().convertMapResponse(apiResponse, coroutineDispatcher)
-                    .onEach { map ->
-                        mapDao.insert(map)
-                    }
-            } else {
-                emit(FinalResponse.Success(localMaps))
-                val apiResponse = apiService.getMaps().data
-                localMaps = NetworkToLocal().convertMapResponse(apiResponse, coroutineDispatcher)
-                    .onEach { map ->
-                        mapDao.insert(map)
-                    }
-            }
+            localMaps =
+                if (localMaps.isEmpty()) {
+                    val apiResponse = apiService.getMaps()
+                    ConvertMap().execute(apiResponse, coroutineDispatcher)
+                        .onEach { map ->
+                            mapDao.insert(map)
+                        }
+                } else {
+                    emit(FinalResponse.Success(localMaps))
+                    val apiResponse = apiService.getMaps()
+                    ConvertMap().execute(apiResponse, coroutineDispatcher)
+                        .onEach { map ->
+                            mapDao.insert(map)
+                        }
+                }
             emit(FinalResponse.Success(localMaps))
         }
             .flowOn(coroutineDispatcher)
@@ -104,15 +106,18 @@ class MainRepositoryImpl @Inject constructor(
         return flow<FinalResponse<List<NetworkWeaponData>>> {
             if (memoryCache.weapons.isEmpty()) {
                 val apiResponse = apiService.getWeapons()
-                memoryCache.weapons.addAll(apiResponse.data.sortedBy { it.displayName })
+                memoryCache.weapons.addAll(apiResponse)
             }
             emit(FinalResponse.Success(memoryCache.weapons))
-        }.flowOn(coroutineDispatcher).onStart { emit(FinalResponse.Loading) }.catch {
-            when (this) {
-                is IOException -> emit(FinalResponse.IoException)
-                is HttpException -> emit(FinalResponse.GenericException(code(), message()))
-                else -> emit(FinalResponse.GenericException(null, it.message))
-            }
         }
+            .flowOn(coroutineDispatcher)
+            .onStart { emit(FinalResponse.Loading) }
+            .catch {
+                when (this) {
+                    is IOException -> emit(FinalResponse.IoException)
+                    is HttpException -> emit(FinalResponse.GenericException(code(), message()))
+                    else -> emit(FinalResponse.GenericException(null, it.message))
+                }
+            }
     }
 }

@@ -6,11 +6,15 @@ import androidx.room.*
 interface AgentDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(agent: LocalAgentData)
+    suspend fun insertAgent(agent: LocalAgentData)
 
-    @Update
-    suspend fun update(agent: LocalAgentData)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAbility(ability: LocalAbility)
 
-    @Query("SELECT * FROM agent_table ORDER BY agent_name")
-    fun getAgent(): List<LocalAgentData>
+    @Query("SELECT * FROM agent_table")
+    fun getListOfAgents(): List<LocalAgentData>
+
+//    @Transaction
+//    @Query("SELECT 1 FROM agent_table WHERE agent_name = :agentName")
+//    fun getAgentDetail(agentName: String): AgentWithAbility
 }

@@ -8,7 +8,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class RemoteAgentData(
     @SerializedName("abilities")
-    val abilities: List<Ability>,
+    val abilities: List<RemoteAbility>,
     @SerializedName("bustPortrait")
     val bustPortrait: String?,
     @SerializedName("characterTags")

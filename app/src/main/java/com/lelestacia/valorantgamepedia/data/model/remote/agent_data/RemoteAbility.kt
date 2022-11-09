@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class Ability(
+data class RemoteAbility(
     @SerializedName("description")
     val description: String,
     @SerializedName("displayIcon")

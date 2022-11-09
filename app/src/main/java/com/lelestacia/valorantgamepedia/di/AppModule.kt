@@ -5,6 +5,7 @@ import androidx.room.Room
 import androidx.viewbinding.BuildConfig
 import com.lelestacia.valorantgamepedia.data.api.ValorantApi
 import com.lelestacia.valorantgamepedia.data.local.LocalDatabase
+import com.lelestacia.valorantgamepedia.data.remote.ValorantApiSource
 import com.lelestacia.valorantgamepedia.data.repository.MainRepository
 import com.lelestacia.valorantgamepedia.data.repository.MainRepositoryImpl
 import com.lelestacia.valorantgamepedia.data.repository.SharedPrefRepository
@@ -59,8 +60,13 @@ object AppModule {
 
     @Provides
     @Singleton
+    fun provideApiService(valorantApi: ValorantApi) : ValorantApiSource =
+        ValorantApiSource(valorantApi)
+
+    @Provides
+    @Singleton
     fun provideMainRepository(
-        valorantApi: ValorantApi,
+        valorantApi: ValorantApiSource,
         localDatabase: LocalDatabase
     ): MainRepository =
         MainRepositoryImpl(valorantApi, Dispatchers.IO, localDatabase)

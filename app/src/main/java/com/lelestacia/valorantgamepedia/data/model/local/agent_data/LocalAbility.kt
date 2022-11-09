@@ -1,12 +1,18 @@
 package com.lelestacia.valorantgamepedia.data.model.local.agent_data
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
+import androidx.room.ColumnInfo
+import androidx.room.Entity
 
-@Parcelize
+@Entity(tableName = "ability_table", primaryKeys = ["skill_name", "slot"])
 data class LocalAbility(
-    val abilityDisplayName: String,
-    val abilityDisplayIcon: String,
-    val abilityDescription: String,
-    val slot: String
-) : Parcelable
+
+    @ColumnInfo(name = "agent_name") val agentName: String,
+
+    @ColumnInfo(name = "skill_name") val displayName: String,
+
+    @ColumnInfo(name = "skill_icon") val displayIcon: String,
+
+    @ColumnInfo(name = "skill_description") val description: String,
+
+    @ColumnInfo(name = "slot") val slot: String
+)

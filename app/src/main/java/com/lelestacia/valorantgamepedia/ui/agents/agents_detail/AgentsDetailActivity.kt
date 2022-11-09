@@ -1,6 +1,6 @@
 package com.lelestacia.valorantgamepedia.ui.agents.agents_detail
 
-import android.R
+import android.R.color
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -35,7 +35,7 @@ class AgentsDetailActivity : AppCompatActivity() {
         val agentSkillAdapter = AgentSkillAdapter()
 
         supportActionBar?.hide()
-        window.statusBarColor = ContextCompat.getColor(this, R.color.black)
+        window.statusBarColor = ContextCompat.getColor(this, color.black)
 
         binding.apply {
             rvAgentSkill.setHasFixedSize(true)

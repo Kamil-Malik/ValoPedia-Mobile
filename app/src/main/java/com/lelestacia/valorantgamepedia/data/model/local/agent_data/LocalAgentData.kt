@@ -1,29 +1,25 @@
 package com.lelestacia.valorantgamepedia.data.model.local.agent_data
 
-import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import kotlinx.parcelize.Parcelize
 
-@Parcelize
 @Entity(tableName = "agent_table")
 data class LocalAgentData(
 
-    @PrimaryKey @ColumnInfo(name = "uuid") val localAgentUUID: String,
+    @PrimaryKey(autoGenerate = false)
+    @ColumnInfo(name = "agent_uuid") val uuid: String,
 
-    @ColumnInfo(name = "agent_name") val localAgentName: String,
+    @ColumnInfo(name = "agent_name") val displayName: String,
 
-    @ColumnInfo(name = "agent_icon") val localAgentIcon: String,
+    @ColumnInfo(name = "agent_icon") val displayIcon: String,
 
-    @ColumnInfo(name = "full_portrait") val localAgentPortrait: String,
+    @ColumnInfo(name = "agent_portrait") val displayPortrait: String,
 
-    @ColumnInfo(name = "agent_description") val localAgentDescription: String,
+    @ColumnInfo(name = "agent_description") val description: String,
 
-//    @Embedded val localAgentAbilities: List<LocalAbility>,
+    @ColumnInfo(name = "agent_tag") val displayTag: List<String>,
 
-    @ColumnInfo(name = "character_tag") val localAgentTags: List<String>,
-
-    @Embedded val localAgentRole: LocalRole
-) : Parcelable
+    @Embedded val role: LocalRole
+)

@@ -3,9 +3,9 @@ package com.lelestacia.valorantgamepedia.data.local
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.lelestacia.valorantgamepedia.data.model.local.agent_data.AgentDao
-import com.lelestacia.valorantgamepedia.data.model.local.agent_data.LocalAbility
-import com.lelestacia.valorantgamepedia.data.model.local.agent_data.LocalAgentData
+import com.lelestacia.valorantgamepedia.data.model.local.agent_data.dao.AgentDao
+import com.lelestacia.valorantgamepedia.data.model.local.agent_data.entities.LocalAbility
+import com.lelestacia.valorantgamepedia.data.model.local.agent_data.entities.LocalAgentData
 import com.lelestacia.valorantgamepedia.data.model.local.converter.StringConverter
 import com.lelestacia.valorantgamepedia.data.model.local.maps_data.LocalMapData
 import com.lelestacia.valorantgamepedia.data.model.local.maps_data.MapDao

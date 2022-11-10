@@ -1,6 +1,6 @@
 package com.lelestacia.valorantgamepedia.data.model.mapper
 
-import com.lelestacia.valorantgamepedia.data.model.local.agent_data.LocalAbility
+import com.lelestacia.valorantgamepedia.data.model.local.agent_data.entities.LocalAbility
 import com.lelestacia.valorantgamepedia.data.model.remote.agent_data.RemoteAgentData
 import kotlinx.coroutines.*
 
@@ -10,12 +10,11 @@ class ConvertAbility {
         list: List<RemoteAgentData>,
         coroutineDispatcher: CoroutineDispatcher
     ): List<LocalAbility> {
-        val arr = arrayListOf<LocalAbility>()
-        val job = arrayListOf<Job>()
+        val arr = arrayListOf<Deferred<LocalAbility>>()
         list.forEach { agent ->
             agent.abilities.forEach {
-                val currentJob = CoroutineScope(coroutineDispatcher).launch {
-                    arr.add(
+                arr.add(
+                    CoroutineScope(coroutineDispatcher).async {
                         LocalAbility(
                             agentName = agent.displayName,
                             displayName = it.displayName,
@@ -23,12 +22,10 @@ class ConvertAbility {
                             description = it.description,
                             slot = it.slot
                         )
-                    )
-                }
-                job.add(currentJob)
+                    }
+                )
             }
         }
-        job.joinAll()
-        return arr
+        return arr.awaitAll()
     }
 }

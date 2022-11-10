@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.lelestacia.valorantgamepedia.R
-import com.lelestacia.valorantgamepedia.data.model.local.agent_data.LocalAgentData
+import com.lelestacia.valorantgamepedia.data.model.local.agent_data.entities.LocalAgentData
 import com.lelestacia.valorantgamepedia.databinding.ItemAgentBinding
 
 class AgentsAdapter : ListAdapter<LocalAgentData, AgentsAdapter.AgentsViewHolder>(DIFF_CALLBACK) {

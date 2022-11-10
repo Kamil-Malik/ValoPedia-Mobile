@@ -1,18 +1,24 @@
 package com.lelestacia.valorantgamepedia.data.model.mapper
 
-import com.lelestacia.valorantgamepedia.data.model.local.agent_data.LocalAgentData
-import com.lelestacia.valorantgamepedia.data.model.local.agent_data.LocalRole
+import com.lelestacia.valorantgamepedia.data.model.local.agent_data.entities.LocalAgentData
+import com.lelestacia.valorantgamepedia.data.model.local.agent_data.entities.LocalRole
 import com.lelestacia.valorantgamepedia.data.model.remote.agent_data.RemoteAgentData
 import com.lelestacia.valorantgamepedia.data.model.remote.agent_data.Role
+import kotlinx.coroutines.*
 
 class ConvertAgent {
 
-    fun execute(remoteAgentData: List<RemoteAgentData>): List<LocalAgentData> {
-        val arr = arrayListOf<LocalAgentData>()
+    suspend fun execute(
+        remoteAgentData: List<RemoteAgentData>,
+        coroutineDispatcher: CoroutineDispatcher
+    ): List<LocalAgentData> {
+        val arr = arrayListOf<Deferred<LocalAgentData>>()
         remoteAgentData.forEach {
-            arr.add(mapAgent(it))
+            arr.add(CoroutineScope(coroutineDispatcher).async {
+                mapAgent(it)
+            })
         }
-        return arr
+        return arr.awaitAll()
     }
 
     private fun mapAgent(remoteAgentData: RemoteAgentData): LocalAgentData {

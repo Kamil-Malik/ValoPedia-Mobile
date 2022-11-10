@@ -1,7 +1,9 @@
-package com.lelestacia.valorantgamepedia.data.model.local.agent_data
+package com.lelestacia.valorantgamepedia.data.model.local.agent_data.relation
 
 import androidx.room.Embedded
 import androidx.room.Relation
+import com.lelestacia.valorantgamepedia.data.model.local.agent_data.entities.LocalAbility
+import com.lelestacia.valorantgamepedia.data.model.local.agent_data.entities.LocalAgentData
 
 data class AgentWithAbility(
 

@@ -2,7 +2,7 @@ package com.lelestacia.valorantgamepedia.data.repository
 
 import com.lelestacia.valorantgamepedia.data.local.LocalDatabase
 import com.lelestacia.valorantgamepedia.data.local.MemoryCache
-import com.lelestacia.valorantgamepedia.data.model.local.agent_data.LocalAgentData
+import com.lelestacia.valorantgamepedia.data.model.local.agent_data.entities.LocalAgentData
 import com.lelestacia.valorantgamepedia.data.model.local.maps_data.LocalMapData
 import com.lelestacia.valorantgamepedia.data.model.mapper.ConvertAbility
 import com.lelestacia.valorantgamepedia.data.model.mapper.ConvertAgent
@@ -29,19 +29,44 @@ class MainRepositoryImpl @Inject constructor(
 
     override fun getAgents(): Flow<FinalResponse<List<LocalAgentData>>> {
         return flow<FinalResponse<List<LocalAgentData>>> {
-            var localAgents = agentDao.getListOfAgents()
+            if (memoryCache.localAgent.isNotEmpty()) {
+                emit(FinalResponse.Success(memoryCache.localAgent))
+            } else {
+                val localAgentData = agentDao.getListOfAgents()
+                if (localAgentData.isNotEmpty()) {
+                    emit(FinalResponse.Success(localAgentData))
+                    val apiResponse = apiService.getAgents()
+                    ConvertAbility().execute(apiResponse, coroutineDispatcher)
+                        .onEach { agentDao.insertAbility(it) }
+                    ConvertAgent().execute(apiResponse, coroutineDispatcher)
+                        .onEach { agentDao.insertAgent(it) }
+                    emit(FinalResponse.Success(localAgentData))
+                } else {
+                    val apiResponse = apiService.getAgents()
+                    ConvertAbility().execute(apiResponse, coroutineDispatcher)
+                        .onEach { agentDao.insertAbility(it) }
+                    val agentData = ConvertAgent().execute(apiResponse, coroutineDispatcher)
+                        .onEach { agentDao.insertAgent(it) }
+                    memoryCache.localAgent.addAll(agentData)
+                }
+            }
+
+
+            var localAgents = memoryCache.localAgent as List<LocalAgentData>
             localAgents =
                 if (localAgents.isEmpty()) {
                     val apiResponse = apiService.getAgents()
                     ConvertAbility().execute(apiResponse, coroutineDispatcher)
                         .onEach { agentDao.insertAbility(it) }
-                    ConvertAgent().execute(apiResponse).onEach { agentDao.insertAgent(it) }
+                    ConvertAgent().execute(apiResponse, coroutineDispatcher)
+                        .onEach { agentDao.insertAgent(it) }
                 } else {
                     emit(FinalResponse.Success(localAgents))
                     val apiResponse = apiService.getAgents()
                     ConvertAbility().execute(apiResponse, coroutineDispatcher)
                         .onEach { agentDao.insertAbility(it) }
-                    ConvertAgent().execute(apiResponse).onEach { agentDao.insertAgent(it) }
+                    ConvertAgent().execute(apiResponse, coroutineDispatcher)
+                        .onEach { agentDao.insertAgent(it) }
                 }
             emit(FinalResponse.Success(localAgents))
         }.flowOn(coroutineDispatcher).onStart {
@@ -73,6 +98,25 @@ class MainRepositoryImpl @Inject constructor(
 
     override fun getMaps(): Flow<FinalResponse<List<LocalMapData>>> {
         return flow<FinalResponse<List<LocalMapData>>> {
+            if (memoryCache.localMaps.isNotEmpty()) {
+                emit(FinalResponse.Success(memoryCache.localMaps))
+            } else {
+                var dbMaps = mapDao.getMap()
+                if (dbMaps.isNotEmpty()) {
+                    emit(FinalResponse.Success(dbMaps))
+                }
+                dbMaps = ConvertMap()
+                    .execute(apiService.getMaps(), coroutineDispatcher)
+                    .onEach {
+                        mapDao.insert(it)
+                    }
+                memoryCache.localMaps.apply {
+                    clear()
+                    addAll(dbMaps)
+                }
+                emit(FinalResponse.Success(dbMaps))
+            }
+
             var localMaps = mapDao.getMap()
             localMaps =
                 if (localMaps.isEmpty()) {

@@ -1,4 +1,4 @@
-package com.lelestacia.valorantgamepedia.data.model.local.agent_data
+package com.lelestacia.valorantgamepedia.data.model.local.agent_data.entities
 
 data class LocalRole(
 

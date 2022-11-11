@@ -1,6 +1,6 @@
 package com.lelestacia.valorantgamepedia.data.model.mapper
 
-import com.lelestacia.valorantgamepedia.data.model.local.maps_data.LocalMapData
+import com.lelestacia.valorantgamepedia.data.model.local.maps_data.entity.LocalMapData
 import com.lelestacia.valorantgamepedia.data.model.remote.maps_data.RemoteMapData
 import kotlinx.coroutines.*
 
@@ -23,12 +23,12 @@ class ConvertMap {
 
     private fun convertMap(remoteMapData: RemoteMapData) : LocalMapData {
         return LocalMapData(
-            localMapUUID = remoteMapData.networkMapUUID,
-            localMapDisplayName = remoteMapData.networkMapDisplayName,
-            localMapListIcon = remoteMapData.networkMapListIcon,
-            localMapCoordinate = remoteMapData.networkMapCoordinate,
-            localMapDisplayIcon = remoteMapData.networkMapDisplayIcon ?: "",
-            localMapSplashIcon = remoteMapData.networkMapSplash
+            uuid = remoteMapData.networkMapUUID,
+            displayName = remoteMapData.networkMapDisplayName,
+            listIcon = remoteMapData.networkMapListIcon,
+            displayCoordinate = remoteMapData.networkMapCoordinate,
+            displayIcon = remoteMapData.networkMapDisplayIcon ?: "",
+            splashIcon = remoteMapData.networkMapSplash
         )
     }
 }

@@ -10,8 +10,12 @@ data class AgentWithAbility(
     @Embedded val agent: LocalAgentData,
 
     @Relation(
-        parentColumn = "agent_name",
-        entityColumn = "agent_name"
+        parentColumn = KEY_CONNECTOR,
+        entityColumn = KEY_CONNECTOR
     )
     val ability: List<LocalAbility>
-)
+) {
+    companion object {
+        private const val KEY_CONNECTOR = "agent_uuid"
+    }
+}

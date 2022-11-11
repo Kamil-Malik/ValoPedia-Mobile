@@ -1,11 +1,8 @@
 package com.lelestacia.valorantgamepedia.data.model.remote.agent_data
 
 
-import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import kotlinx.parcelize.Parcelize
 
-@Parcelize
 data class RemoteAgentData(
     @SerializedName("abilities")
     val abilities: List<RemoteAbility>,
@@ -31,4 +28,4 @@ data class RemoteAgentData(
     val uuid: String,
     @SerializedName("voiceLine")
     val voiceLine: VoiceLine
-) : Parcelable
+)

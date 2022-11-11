@@ -16,7 +16,7 @@ class ConvertAbility {
                 arr.add(
                     CoroutineScope(coroutineDispatcher).async {
                         LocalAbility(
-                            agentName = agent.displayName,
+                            agentUUID = agent.uuid,
                             displayName = it.displayName,
                             displayIcon = it.displayIcon ?: "",
                             description = it.description,

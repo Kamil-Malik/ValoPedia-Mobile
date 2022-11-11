@@ -1,5 +1,6 @@
 package com.lelestacia.valorantgamepedia.ui.agents
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -10,6 +11,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.lelestacia.valorantgamepedia.R
 import com.lelestacia.valorantgamepedia.data.model.local.agent_data.entities.LocalAgentData
 import com.lelestacia.valorantgamepedia.databinding.ItemAgentBinding
+import com.lelestacia.valorantgamepedia.ui.agents.agents_detail.AgentsDetailActivity
 
 class AgentsAdapter : ListAdapter<LocalAgentData, AgentsAdapter.AgentsViewHolder>(DIFF_CALLBACK) {
 
@@ -32,11 +34,10 @@ class AgentsAdapter : ListAdapter<LocalAgentData, AgentsAdapter.AgentsViewHolder
                 tvAgentRoleTitle.text = item.role.displayName
 
                 binding.root.setOnClickListener {
-                    /*with(itemView.context) {
-                        startActivity(Intent(this, AgentsDetailActivity::class.java).also {
-                            it.putExtra("AGENT", item)
-                        })
-                    }*/
+                    with(itemView.context) {
+                        startActivity(Intent(this, AgentsDetailActivity::class.java)
+                            .also { it.putExtra(AGENT_UUID, item.uuid) })
+                    }
                 }
             }
         }
@@ -66,5 +67,6 @@ class AgentsAdapter : ListAdapter<LocalAgentData, AgentsAdapter.AgentsViewHolder
             }
 
         }
+        const val AGENT_UUID = "agentUUID"
     }
 }

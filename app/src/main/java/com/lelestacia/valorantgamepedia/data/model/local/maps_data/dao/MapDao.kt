@@ -1,6 +1,7 @@
-package com.lelestacia.valorantgamepedia.data.model.local.maps_data
+package com.lelestacia.valorantgamepedia.data.model.local.maps_data.dao
 
 import androidx.room.*
+import com.lelestacia.valorantgamepedia.data.model.local.maps_data.entity.LocalMapData
 
 @Dao
 interface MapDao {
@@ -11,6 +12,6 @@ interface MapDao {
     @Update
     suspend fun update(map: LocalMapData)
 
-    @Query("Select * from map_table ORDER BY display_name")
+    @Query("Select * from map_table ORDER BY maps_name")
     fun getMap(): List<LocalMapData>
 }

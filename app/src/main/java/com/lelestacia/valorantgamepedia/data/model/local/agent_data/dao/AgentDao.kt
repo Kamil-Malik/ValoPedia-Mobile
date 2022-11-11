@@ -18,10 +18,6 @@ interface AgentDao {
     fun getListOfAgents(): List<LocalAgentData>
 
     @Transaction
-    @Query("SELECT * FROM agent_table")
-    fun getListOfAgentAndAbility(): List<AgentWithAbility>
-
-    @Transaction
-    @Query("SELECT * FROM agent_table WHERE agent_name = :agentName")
-    fun getAgentDetail(agentName: String): AgentWithAbility
+    @Query("SELECT * FROM agent_table WHERE agent_uuid = :uuid")
+    fun getAgentDetail(uuid: String): AgentWithAbility
 }

@@ -1,7 +1,7 @@
 package com.lelestacia.valorantgamepedia.data.local
 
 import com.lelestacia.valorantgamepedia.data.model.local.agent_data.entities.LocalAgentData
-import com.lelestacia.valorantgamepedia.data.model.local.maps_data.LocalMapData
+import com.lelestacia.valorantgamepedia.data.model.local.maps_data.entity.LocalMapData
 import com.lelestacia.valorantgamepedia.data.model.remote.agent_data.RemoteAgentData
 import com.lelestacia.valorantgamepedia.data.model.remote.currencies_data.NetworkCurrencyData
 import com.lelestacia.valorantgamepedia.data.model.remote.maps_data.RemoteMapData

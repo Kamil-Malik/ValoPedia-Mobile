@@ -8,16 +8,16 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.lelestacia.valorantgamepedia.R
-import com.lelestacia.valorantgamepedia.data.model.remote.agent_data.RemoteAbility
+import com.lelestacia.valorantgamepedia.data.model.local.agent_data.entities.LocalAbility
 import com.lelestacia.valorantgamepedia.databinding.ItemSkillActiveBinding
 import com.lelestacia.valorantgamepedia.databinding.ItemSkillPassiveBinding
 import com.lelestacia.valorantgamepedia.usecases.SkillType
 
-class AgentSkillAdapter : ListAdapter<RemoteAbility, ViewHolder>(DIFF_CALLBACK) {
+class AgentSkillAdapter : ListAdapter<LocalAbility, ViewHolder>(DIFF_CALLBACK) {
 
     class ViewHolderActive(private val binding: ItemSkillActiveBinding) :
         ViewHolder(binding.root) {
-        fun bind(item: RemoteAbility) {
+        fun bind(item: LocalAbility) {
             binding.apply {
                 Glide.with(itemView.context)
                     .load(item.displayIcon)
@@ -37,7 +37,7 @@ class AgentSkillAdapter : ListAdapter<RemoteAbility, ViewHolder>(DIFF_CALLBACK) 
     class ViewHolderPassive(private val binding: ItemSkillPassiveBinding) :
         ViewHolder(binding.root) {
 
-        fun bind(item: RemoteAbility) {
+        fun bind(item: LocalAbility) {
             binding.apply {
                 tvAgentSkillTitle.text = item.displayName
                 tvAgentSkillDescription.text = item.description
@@ -76,12 +76,12 @@ class AgentSkillAdapter : ListAdapter<RemoteAbility, ViewHolder>(DIFF_CALLBACK) 
 
     companion object {
 
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<RemoteAbility>() {
-            override fun areItemsTheSame(oldItem: RemoteAbility, newItem: RemoteAbility): Boolean {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<LocalAbility>() {
+            override fun areItemsTheSame(oldItem: LocalAbility, newItem: LocalAbility): Boolean {
                 return oldItem == newItem
             }
 
-            override fun areContentsTheSame(oldItem: RemoteAbility, newItem: RemoteAbility): Boolean {
+            override fun areContentsTheSame(oldItem: LocalAbility, newItem: LocalAbility): Boolean {
                 return oldItem.slot == newItem.slot
             }
         }

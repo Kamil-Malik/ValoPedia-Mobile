@@ -7,8 +7,8 @@ import com.lelestacia.valorantgamepedia.data.model.local.agent_data.dao.AgentDao
 import com.lelestacia.valorantgamepedia.data.model.local.agent_data.entities.LocalAbility
 import com.lelestacia.valorantgamepedia.data.model.local.agent_data.entities.LocalAgentData
 import com.lelestacia.valorantgamepedia.data.model.local.converter.StringConverter
-import com.lelestacia.valorantgamepedia.data.model.local.maps_data.LocalMapData
-import com.lelestacia.valorantgamepedia.data.model.local.maps_data.MapDao
+import com.lelestacia.valorantgamepedia.data.model.local.maps_data.entity.LocalMapData
+import com.lelestacia.valorantgamepedia.data.model.local.maps_data.dao.MapDao
 
 @Database(
     entities = [LocalMapData::class, LocalAgentData::class, LocalAbility::class],

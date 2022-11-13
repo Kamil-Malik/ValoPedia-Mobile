@@ -5,16 +5,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.lelestacia.valorantgamepedia.data.model.local.LocalWeaponDamageRange
+import com.lelestacia.valorantgamepedia.data.model.local.DisplayWeaponRange
 import com.lelestacia.valorantgamepedia.databinding.ItemWeaponDamageBinding
 import com.lelestacia.valorantgamepedia.databinding.ItemWeaponDamageHeaderBinding
 
-class WeaponDamageAdapter : ListAdapter<LocalWeaponDamageRange, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
+class WeaponDamageAdapter : ListAdapter<DisplayWeaponRange, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
 
     class ViewHolderBody(private val binding: ItemWeaponDamageBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: LocalWeaponDamageRange) {
+        fun bind(item: DisplayWeaponRange) {
             binding.apply {
                 tvHeaderDamage.text = item.range
                 tvHeadDamage.text = item.headDamage
@@ -27,7 +27,7 @@ class WeaponDamageAdapter : ListAdapter<LocalWeaponDamageRange, RecyclerView.Vie
     class ViewHolderHeader(private val binding: ItemWeaponDamageHeaderBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: LocalWeaponDamageRange) {
+        fun bind(item: DisplayWeaponRange) {
             binding.apply {
                 tvHeaderDamage.text = item.range
                 tvHeadDamage.text = item.headDamage
@@ -66,15 +66,15 @@ class WeaponDamageAdapter : ListAdapter<LocalWeaponDamageRange, RecyclerView.Vie
     }
 
     companion object {
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<LocalWeaponDamageRange>() {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<DisplayWeaponRange>() {
             override fun areItemsTheSame(
-                oldItem: LocalWeaponDamageRange, newItem: LocalWeaponDamageRange
+                oldItem: DisplayWeaponRange, newItem: DisplayWeaponRange
             ): Boolean {
                 return newItem.range == oldItem.range
             }
 
             override fun areContentsTheSame(
-                oldItem: LocalWeaponDamageRange, newItem: LocalWeaponDamageRange
+                oldItem: DisplayWeaponRange, newItem: DisplayWeaponRange
             ): Boolean {
                 return newItem == oldItem
             }

@@ -1,23 +1,20 @@
 package com.lelestacia.valorantgamepedia.data.local
 
-import com.lelestacia.valorantgamepedia.data.model.local.agent_data.entities.LocalAgentData
-import com.lelestacia.valorantgamepedia.data.model.local.maps_data.entity.LocalMapData
-import com.lelestacia.valorantgamepedia.data.model.remote.agent_data.RemoteAgentData
+import com.lelestacia.valorantgamepedia.data.model.local.maps_data.entity.Map
+import com.lelestacia.valorantgamepedia.data.model.remote.agent_data.NetworkAgent
 import com.lelestacia.valorantgamepedia.data.model.remote.currencies_data.NetworkCurrencyData
-import com.lelestacia.valorantgamepedia.data.model.remote.maps_data.RemoteMapData
-import com.lelestacia.valorantgamepedia.data.model.remote.weapons_data.NetworkWeaponData
+import com.lelestacia.valorantgamepedia.data.model.remote.maps_data.NetworkMap
+import com.lelestacia.valorantgamepedia.data.model.remote.weapons_data.NetworkWeapon
 
 object MemoryCache {
 
-    val agents: MutableList<RemoteAgentData> = mutableListOf()
-
-    val localAgent: MutableList<LocalAgentData> = mutableListOf()
+    val agents: MutableList<NetworkAgent> = mutableListOf()
 
     val currencies: MutableList<NetworkCurrencyData> = mutableListOf()
 
-    val maps: MutableList<RemoteMapData> = mutableListOf()
+    val maps: MutableList<NetworkMap> = mutableListOf()
 
-    val localMaps: MutableList<LocalMapData> = mutableListOf()
+    val localMaps: MutableList<Map> = mutableListOf()
 
-    val weapons: MutableList<NetworkWeaponData> = mutableListOf()
+    val weapons: MutableList<NetworkWeapon> = mutableListOf()
 }

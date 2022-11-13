@@ -8,15 +8,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.lelestacia.valorantgamepedia.R
-import com.lelestacia.valorantgamepedia.data.model.local.maps_data.entity.LocalMapData
+import com.lelestacia.valorantgamepedia.data.model.local.maps_data.entity.Map
 import com.lelestacia.valorantgamepedia.databinding.ItemMapBinding
 
-class MapsAdapter : ListAdapter<LocalMapData, MapsAdapter.ViewHolder>(DIFF_CALLBACK) {
+class MapsAdapter : ListAdapter<Map, MapsAdapter.ViewHolder>(DIFF_CALLBACK) {
 
     inner class ViewHolder(private val binding: ItemMapBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: LocalMapData) {
+        fun bind(item: Map) {
             binding.apply {
                 Glide.with(itemView.context)
                     .load(item.listIcon)
@@ -43,12 +43,12 @@ class MapsAdapter : ListAdapter<LocalMapData, MapsAdapter.ViewHolder>(DIFF_CALLB
     }
 
     companion object {
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<LocalMapData>() {
-            override fun areItemsTheSame(oldItem: LocalMapData, newItem: LocalMapData): Boolean {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Map>() {
+            override fun areItemsTheSame(oldItem: Map, newItem: Map): Boolean {
                 return oldItem.uuid == newItem.uuid
             }
 
-            override fun areContentsTheSame(oldItem: LocalMapData, newItem: LocalMapData): Boolean {
+            override fun areContentsTheSame(oldItem: Map, newItem: Map): Boolean {
                 return oldItem == newItem
             }
         }

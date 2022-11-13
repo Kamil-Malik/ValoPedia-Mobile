@@ -17,8 +17,6 @@ data class ShopData(
     val categoryText: String,
     @SerializedName("cost")
     val cost: Int,
-    @SerializedName("gridPosition")
-    val gridPosition: GridPosition?,
     @SerializedName("newImage")
     val newImage: String
 ): Parcelable

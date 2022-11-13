@@ -2,20 +2,16 @@ package com.lelestacia.valorantgamepedia.data.model.local.agent_data.relation
 
 import androidx.room.Embedded
 import androidx.room.Relation
-import com.lelestacia.valorantgamepedia.data.model.local.agent_data.entities.LocalAbility
-import com.lelestacia.valorantgamepedia.data.model.local.agent_data.entities.LocalAgentData
+import com.lelestacia.valorantgamepedia.data.model.local.agent_data.entities.Ability
+import com.lelestacia.valorantgamepedia.data.model.local.agent_data.entities.Agent
 
 data class AgentWithAbility(
 
-    @Embedded val agent: LocalAgentData,
+    @Embedded val agent: Agent,
 
     @Relation(
-        parentColumn = KEY_CONNECTOR,
-        entityColumn = KEY_CONNECTOR
+        parentColumn = "uuid",
+        entityColumn = "agent_uuid"
     )
-    val ability: List<LocalAbility>
-) {
-    companion object {
-        private const val KEY_CONNECTOR = "agent_uuid"
-    }
-}
+    val ability: List<Ability>
+)

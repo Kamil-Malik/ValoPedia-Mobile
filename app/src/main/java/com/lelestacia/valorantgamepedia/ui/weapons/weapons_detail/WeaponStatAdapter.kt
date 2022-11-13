@@ -5,17 +5,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.lelestacia.valorantgamepedia.data.model.local.LocalWeaponStat
+import com.lelestacia.valorantgamepedia.data.model.local.DisplayWeaponStat
 import com.lelestacia.valorantgamepedia.databinding.ItemWeaponStatBinding
 
 
 class WeaponStatAdapter :
-    ListAdapter<LocalWeaponStat, WeaponStatAdapter.ViewHolder>(DIFF_CALLBACK) {
+    ListAdapter<DisplayWeaponStat, WeaponStatAdapter.ViewHolder>(DIFF_CALLBACK) {
 
     inner class ViewHolder(private val binding: ItemWeaponStatBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: LocalWeaponStat) {
+        fun bind(item: DisplayWeaponStat) {
             binding.apply {
                 tvWeaponStatTitle.text = item.title
                 tvWeaponStatValue.text = item.value
@@ -37,17 +37,17 @@ class WeaponStatAdapter :
     }
 
     companion object {
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<LocalWeaponStat>() {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<DisplayWeaponStat>() {
             override fun areItemsTheSame(
-                oldItem: LocalWeaponStat,
-                newItem: LocalWeaponStat
+                oldItem: DisplayWeaponStat,
+                newItem: DisplayWeaponStat
             ): Boolean {
                 return oldItem.title == newItem.title
             }
 
             override fun areContentsTheSame(
-                oldItem: LocalWeaponStat,
-                newItem: LocalWeaponStat
+                oldItem: DisplayWeaponStat,
+                newItem: DisplayWeaponStat
             ): Boolean {
                 return oldItem == newItem
             }

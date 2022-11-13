@@ -8,15 +8,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.lelestacia.valorantgamepedia.R
-import com.lelestacia.valorantgamepedia.data.model.remote.weapons_data.Skin
+import com.lelestacia.valorantgamepedia.data.model.local.weapon_data.entity.WeaponSkin
 import com.lelestacia.valorantgamepedia.databinding.ItemWeaponSkinBinding
 
-class WeaponSkinAdapter : ListAdapter<Skin, WeaponSkinAdapter.ViewHolder>(DIFF_CALLBACK) {
+class WeaponSkinAdapter : ListAdapter<WeaponSkin, WeaponSkinAdapter.ViewHolder>(DIFF_CALLBACK) {
 
     inner class ViewHolder(private val binding: ItemWeaponSkinBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: Skin) {
+        fun bind(item: WeaponSkin) {
             binding.apply {
                 Glide.with(itemView.context)
                     .load(item.displayIcon)
@@ -43,12 +43,12 @@ class WeaponSkinAdapter : ListAdapter<Skin, WeaponSkinAdapter.ViewHolder>(DIFF_C
     }
 
     companion object {
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Skin>() {
-            override fun areItemsTheSame(oldItem: Skin, newItem: Skin): Boolean {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<WeaponSkin>() {
+            override fun areItemsTheSame(oldItem: WeaponSkin, newItem: WeaponSkin): Boolean {
                 return oldItem.uuid == newItem.uuid
             }
 
-            override fun areContentsTheSame(oldItem: Skin, newItem: Skin): Boolean {
+            override fun areContentsTheSame(oldItem: WeaponSkin, newItem: WeaponSkin): Boolean {
                 return oldItem == newItem
             }
         }

@@ -1,17 +1,17 @@
 package com.lelestacia.valorantgamepedia.data.model.mapper
 
-import com.lelestacia.valorantgamepedia.data.model.local.maps_data.entity.LocalMapData
-import com.lelestacia.valorantgamepedia.data.model.remote.maps_data.RemoteMapData
+import com.lelestacia.valorantgamepedia.data.model.local.maps_data.entity.Map
+import com.lelestacia.valorantgamepedia.data.model.remote.maps_data.NetworkMap
 import kotlinx.coroutines.*
 
 class ConvertMap {
 
     suspend fun execute(
-        remoteMapData: List<RemoteMapData>,
+        networkMapData: List<NetworkMap>,
         coroutineDispatcher: CoroutineDispatcher
-    ): List<LocalMapData> {
-        val arr = arrayListOf<Deferred<LocalMapData>>()
-        remoteMapData.forEach {
+    ): List<Map> {
+        val arr = arrayListOf<Deferred<Map>>()
+        networkMapData.forEach {
             arr.add(
                 CoroutineScope(coroutineDispatcher).async {
                     convertMap(it)
@@ -21,14 +21,14 @@ class ConvertMap {
         return arr.awaitAll()
     }
 
-    private fun convertMap(remoteMapData: RemoteMapData) : LocalMapData {
-        return LocalMapData(
-            uuid = remoteMapData.networkMapUUID,
-            displayName = remoteMapData.networkMapDisplayName,
-            listIcon = remoteMapData.networkMapListIcon,
-            displayCoordinate = remoteMapData.networkMapCoordinate,
-            displayIcon = remoteMapData.networkMapDisplayIcon ?: "",
-            splashIcon = remoteMapData.networkMapSplash
+    private fun convertMap(networkMap: NetworkMap) : Map {
+        return Map(
+            uuid = networkMap.uuid,
+            displayName = networkMap.displayName,
+            listIcon = networkMap.listIcon,
+            displayCoordinate = networkMap.coordinate,
+            displayIcon = networkMap.displayIcon ?: "",
+            splashIcon = networkMap.splash
         )
     }
 }

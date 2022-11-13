@@ -14,6 +14,7 @@ Materials used :
 - Logging Interceptor
 - ViewModel
 - Retrofit
+- Room Database
 - [Valorant API](https://valorant-api.com/)
 
 Please fork this repository if you want to help me in application development. Please contact me via [Whatsapp](https://wa.me/6282259997760). For G-Drive link click [here](https://drive.google.com/drive/folders/1Z-vIRXdQyG4TgLc245YIropwSWGC9Y7x?usp=share_link)

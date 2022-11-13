@@ -1,34 +1,27 @@
 package com.lelestacia.valorantgamepedia.data.remote
 
 import com.lelestacia.valorantgamepedia.data.api.ValorantApi
-import com.lelestacia.valorantgamepedia.data.model.remote.agent_data.RemoteAgentData
-import com.lelestacia.valorantgamepedia.data.model.remote.currencies_data.NetworkCurrencyData
-import com.lelestacia.valorantgamepedia.data.model.remote.maps_data.RemoteMapData
-import com.lelestacia.valorantgamepedia.data.model.remote.weapons_data.NetworkWeaponData
+import com.lelestacia.valorantgamepedia.data.model.remote.agent.NetworkAgent
+import com.lelestacia.valorantgamepedia.data.model.remote.maps.NetworkMap
+import com.lelestacia.valorantgamepedia.data.model.remote.weapon.NetworkWeapon
 import javax.inject.Inject
 
 class ValorantApiSource @Inject constructor(private val apiService: ValorantApi) {
 
-    suspend fun getAgents(): List<RemoteAgentData> {
+    suspend fun getAgents(): List<NetworkAgent> {
         return apiService
             .getAgents().data
             .filter { it.isPlayableCharacter }
             .sortedBy { it.displayName }
     }
 
-    suspend fun getCurrencies(): List<NetworkCurrencyData> {
+    suspend fun getMaps(): List<NetworkMap> {
         return apiService
-            .getCurrencies().data
+            .getMaps().data
             .sortedBy { it.displayName }
     }
 
-    suspend fun getMaps(): List<RemoteMapData> {
-        return apiService
-            .getMaps().data
-            .sortedBy { it.networkMapDisplayName }
-    }
-
-    suspend fun getWeapons(): List<NetworkWeaponData> {
+    suspend fun getWeapons(): List<NetworkWeapon> {
         return apiService
             .getWeapons().data
             .sortedBy { it.displayName }

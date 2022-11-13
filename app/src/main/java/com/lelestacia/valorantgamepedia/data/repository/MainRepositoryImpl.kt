@@ -1,19 +1,20 @@
 package com.lelestacia.valorantgamepedia.data.repository
 
 import com.lelestacia.valorantgamepedia.data.local.LocalDatabase
-import com.lelestacia.valorantgamepedia.data.local.MemoryCache
-import com.lelestacia.valorantgamepedia.data.model.local.agent_data.entities.LocalAgentData
-import com.lelestacia.valorantgamepedia.data.model.local.agent_data.relation.AgentWithAbility
-import com.lelestacia.valorantgamepedia.data.model.local.maps_data.entity.LocalMapData
-import com.lelestacia.valorantgamepedia.data.model.mapper.ConvertAbility
-import com.lelestacia.valorantgamepedia.data.model.mapper.ConvertAgent
-import com.lelestacia.valorantgamepedia.data.model.mapper.ConvertMap
-import com.lelestacia.valorantgamepedia.data.model.remote.currencies_data.NetworkCurrencyData
-import com.lelestacia.valorantgamepedia.data.model.remote.weapons_data.NetworkWeaponData
+import com.lelestacia.valorantgamepedia.data.model.local.agent.dao.AgentDao
+import com.lelestacia.valorantgamepedia.data.model.local.agent.entities.Agent
+import com.lelestacia.valorantgamepedia.data.model.local.agent.relation.AgentWithAbility
+import com.lelestacia.valorantgamepedia.data.model.local.maps.dao.MapDao
+import com.lelestacia.valorantgamepedia.data.model.local.maps.entity.Map
+import com.lelestacia.valorantgamepedia.data.model.local.weapon.dao.WeaponDao
+import com.lelestacia.valorantgamepedia.data.model.local.weapon.entity.Weapon
+import com.lelestacia.valorantgamepedia.data.model.local.weapon.relation.WeaponDataWithDamageRangeAndSkin
+import com.lelestacia.valorantgamepedia.data.model.mapper.MapToLocal
 import com.lelestacia.valorantgamepedia.data.remote.ValorantApiSource
 import com.lelestacia.valorantgamepedia.utility.FinalResponse
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
@@ -24,39 +25,49 @@ class MainRepositoryImpl @Inject constructor(
     localDatabase: LocalDatabase
 ) : MainRepository {
 
-    private val memoryCache = MemoryCache
-    private val mapDao = localDatabase.mapDao()
-    private val agentDao = localDatabase.agentDao()
+    private val mapDao: MapDao = localDatabase.mapDao()
+    private val agentDao: AgentDao = localDatabase.agentDao()
+    private val weaponDao: WeaponDao = localDatabase.weaponDao()
 
-    override fun getAgents(): Flow<FinalResponse<List<LocalAgentData>>> {
-        return flow<FinalResponse<List<LocalAgentData>>> {
+    private var isAgentUpdated: Boolean = false
+    private var isMapUpdated: Boolean = false
+    private var isWeaponUpdated: Boolean = false
 
-            if (memoryCache.localAgent.isNotEmpty()) {
-                emit(FinalResponse.Success(memoryCache.localAgent))
-                return@flow
-            }
+    override fun getAgents(): Flow<FinalResponse<List<Agent>>> {
+        return flow<FinalResponse<List<Agent>>> {
+            val localData = agentDao.getListOfAgents()
+            if (localData.isNotEmpty())
+                emit(FinalResponse.Success(localData))
 
-            val databaseAgent = agentDao.getListOfAgents()
-            if (databaseAgent.isNotEmpty()) emit(FinalResponse.Success(databaseAgent))
+            if (isAgentUpdated) return@flow
 
             val apiResponse = apiService.getAgents()
-            val networkAgentToLocalAgent = ConvertAgent().execute(apiResponse, coroutineDispatcher)
+            val agent = apiResponse
+                .map { MapToLocal().agent(it) }
+                .onEach { agentDao.insertAgent(it) }
+            apiResponse
+                .map { MapToLocal().ability(it, coroutineDispatcher) }
+                .flatten()
+                .onEach { agentDao.insertAbility(it) }
 
-            if (databaseAgent != networkAgentToLocalAgent) {
-                networkAgentToLocalAgent.onEach { agentDao.insertAgent(it) }
-                ConvertAbility().execute(apiResponse, coroutineDispatcher)
-                    .onEach { agentDao.insertAbility(it) }
-                emit(FinalResponse.Success(networkAgentToLocalAgent))
+            isAgentUpdated = !isAgentUpdated
+            if (localData != agent)
+                emit(FinalResponse.Success(agent))
+
+        }.onStart { emit(FinalResponse.Loading) }.catch {
+
+            val localData = agentDao.getListOfAgents()
+            if (localData.isNotEmpty()) {
+                emit(FinalResponse.Success(localData))
+                return@catch
             }
 
-            memoryCache.localAgent.addAll(databaseAgent)
-        }.flowOn(coroutineDispatcher).onStart { emit(FinalResponse.Loading) }.catch {
             when (this) {
                 is IOException -> emit(FinalResponse.IoException)
-                is HttpException -> emit(FinalResponse.GenericException(code(), message()))
-                else -> emit(FinalResponse.GenericException(null, it.message))
+                is HttpException -> emit(FinalResponse.HttpException(code(), message()))
+                else -> emit(FinalResponse.GenericException(it.message))
             }
-        }
+        }.flowOn(coroutineDispatcher)
     }
 
     override suspend fun getAgentByUUID(uuid: String): AgentWithAbility {
@@ -65,64 +76,91 @@ class MainRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun getCurrencies(): Flow<FinalResponse<List<NetworkCurrencyData>>> {
-        return flow<FinalResponse<List<NetworkCurrencyData>>> {
-            if (memoryCache.currencies.isEmpty()) {
-                val apiResponse = apiService.getCurrencies()
-                memoryCache.currencies.addAll(apiResponse)
+    override fun getMaps(): Flow<FinalResponse<List<Map>>> {
+        return flow<FinalResponse<List<Map>>> {
+
+            val localData = mapDao.getMap()
+            if (localData.isNotEmpty())
+                emit(FinalResponse.Success(localData))
+
+            if (isMapUpdated) return@flow
+
+            val apiResponse = apiService
+                .getMaps()
+                .map { MapToLocal().map(it) }
+                .onEach { mapDao.insert(it) }
+
+            isMapUpdated = !isMapUpdated
+            if (localData != apiResponse)
+                emit(FinalResponse.Success(apiResponse))
+
+        }.onStart { emit(FinalResponse.Loading) }.catch {
+
+            val localData = mapDao.getMap()
+            if (localData.isNotEmpty()) {
+                emit(FinalResponse.Success(localData))
+                return@catch
             }
-            emit(FinalResponse.Success(memoryCache.currencies))
-        }.flowOn(coroutineDispatcher).onStart { emit(FinalResponse.Loading) }.catch {
+
             when (this) {
                 is IOException -> emit(FinalResponse.IoException)
-                is HttpException -> emit(FinalResponse.GenericException(code(), message()))
-                else -> emit(FinalResponse.GenericException(null, it.message))
+                is HttpException -> emit(FinalResponse.HttpException(code(), message()))
+                else -> emit(FinalResponse.GenericException(it.message))
             }
-        }
+        }.flowOn(coroutineDispatcher)
     }
 
-    override fun getMaps(): Flow<FinalResponse<List<LocalMapData>>> {
-        return flow<FinalResponse<List<LocalMapData>>> {
+    override fun getWeapons(): Flow<FinalResponse<List<Weapon>>> {
+        return flow<FinalResponse<List<Weapon>>> {
+            val localData = weaponDao.getListOfWeaponData()
+            if (localData.isNotEmpty())
+                emit(FinalResponse.Success(localData))
 
-            if (memoryCache.localMaps.isNotEmpty()) {
-                emit(FinalResponse.Success(memoryCache.localMaps))
-                return@flow
-            }
+            if (isWeaponUpdated) return@flow
 
-            val databaseMaps = mapDao.getMap()
-            if (databaseMaps.isNotEmpty()) emit(FinalResponse.Success(databaseMaps))
-
-            val apiResponse = apiService.getMaps()
-            val networkMapsToLocalMaps = ConvertMap().execute(apiResponse, coroutineDispatcher)
-
-            if (apiResponse != networkMapsToLocalMaps) {
-                networkMapsToLocalMaps.onEach { mapDao.insert(it) }
-                emit(FinalResponse.Success(networkMapsToLocalMaps))
-            }
-
-            memoryCache.localMaps.addAll(networkMapsToLocalMaps)
-        }.flowOn(coroutineDispatcher).onStart { emit(FinalResponse.Loading) }.catch {
-            when (this) {
-                is IOException -> emit(FinalResponse.IoException)
-                is HttpException -> emit(FinalResponse.GenericException(code(), message()))
-                else -> emit(FinalResponse.GenericException(null, it.message))
-            }
-        }
-    }
-
-    override fun getWeapons(): Flow<FinalResponse<List<NetworkWeaponData>>> {
-        return flow<FinalResponse<List<NetworkWeaponData>>> {
-            if (memoryCache.weapons.isEmpty()) {
-                val apiResponse = apiService.getWeapons()
-                memoryCache.weapons.addAll(apiResponse)
-            }
-            emit(FinalResponse.Success(memoryCache.weapons))
-        }.flowOn(coroutineDispatcher).onStart { emit(FinalResponse.Loading) }.catch {
-                when (this) {
-                    is IOException -> emit(FinalResponse.IoException)
-                    is HttpException -> emit(FinalResponse.GenericException(code(), message()))
-                    else -> emit(FinalResponse.GenericException(null, it.message))
+            val apiResponse = apiService.getWeapons()
+            val weapon = apiResponse
+                .map { MapToLocal().weapon(it) }
+                .onEach { weaponDao.insertWeaponData(it) }
+            apiResponse
+                .map { MapToLocal().skin(it, coroutineDispatcher) }
+                .flatten()
+                .forEach { weaponDao.insertWeaponSkin(it) }
+            apiResponse
+                .map { MapToLocal().damageRange(it, coroutineDispatcher) }
+                .flatten()
+                .forEach { weaponDao.insertDamageRange(it) }
+            apiResponse
+                .map {
+                    MapToLocal().statistic(it)
+                }.forEach {
+                    if (it != null)
+                        weaponDao.insertWeaponStat(it)
                 }
+
+            isWeaponUpdated = !isWeaponUpdated
+            if (localData != weapon)
+                emit(FinalResponse.Success(weapon))
+
+        }.onStart { emit(FinalResponse.Loading) }.catch {
+
+            val localData = weaponDao.getListOfWeaponData()
+            if (localData.isNotEmpty()) {
+                emit(FinalResponse.Success(localData))
+                return@catch
             }
+
+            when (this) {
+                is IOException -> emit(FinalResponse.IoException)
+                is HttpException -> emit(FinalResponse.HttpException(code(), message()))
+                else -> emit(FinalResponse.GenericException(it.message))
+            }
+        }.flowOn(coroutineDispatcher)
+    }
+
+    override suspend fun getWeaponDetail(uuid: String): WeaponDataWithDamageRangeAndSkin {
+        return withContext(coroutineDispatcher) {
+            weaponDao.getSpecificWeaponDetail(uuid)
+        }
     }
 }

@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:contentDescription="@string/weapons"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/odin" />
+        tools:src="@drawable/dummy_weapon" />
 
     <TextView
         android:id="@+id/tv_weapon_skin_title"

@@ -9,16 +9,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.lelestacia.valorantgamepedia.R
-import com.lelestacia.valorantgamepedia.data.model.remote.weapons_data.NetworkWeaponData
+import com.lelestacia.valorantgamepedia.data.model.local.weapon.entity.Weapon
 import com.lelestacia.valorantgamepedia.databinding.ItemWeaponBinding
 import com.lelestacia.valorantgamepedia.ui.weapons.weapons_detail.DetailWeaponActivity
 
-class WeaponListAdapter : ListAdapter<NetworkWeaponData, WeaponListAdapter.ViewHolder>(DIFF_CALLBACK) {
+class WeaponListAdapter : ListAdapter<Weapon, WeaponListAdapter.ViewHolder>(DIFF_CALLBACK) {
 
     inner class ViewHolder(private val binding: ItemWeaponBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: NetworkWeaponData) {
+        fun bind(item: Weapon) {
             binding.apply {
                 Glide.with(itemView.context)
                     .load(item.displayIcon)
@@ -28,20 +28,20 @@ class WeaponListAdapter : ListAdapter<NetworkWeaponData, WeaponListAdapter.ViewH
                 tvWeaponTitle.text = item.displayName
                 tvWeaponCategory.text = itemView.context.getString(
                     R.string.weapon_category,
-                    item.shopData?.category ?: "",
-                    item.shopData?.categoryText ?: ""
+                    item.shopData.category,
+                    item.shopData.categoryText
                 )
-                val cost: String = if (item.shopData?.cost == null || item.shopData.cost == 0) {
-                    "Non Purchasable"
-                } else {
-                    item.shopData.cost.toString()
-                }
-                tvWeaponPrice.text = cost
+
+                tvWeaponPrice.text =
+                    if (item.shopData.cost == 0)
+                        "Non Purchasable"
+                    else
+                        item.shopData.cost.toString()
 
                 root.setOnClickListener {
                     with(itemView.context) {
                         startActivity(Intent(this, DetailWeaponActivity::class.java).also {
-                            it.putExtra("WEAPON", item)
+                            it.putExtra(WEAPON_UUID, item.uuid)
                         })
                     }
                 }
@@ -61,12 +61,13 @@ class WeaponListAdapter : ListAdapter<NetworkWeaponData, WeaponListAdapter.ViewH
     }
 
     companion object {
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<NetworkWeaponData>() {
-            override fun areItemsTheSame(oldItem: NetworkWeaponData, newItem: NetworkWeaponData): Boolean {
+        const val WEAPON_UUID = "WEAPON"
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Weapon>() {
+            override fun areItemsTheSame(oldItem: Weapon, newItem: Weapon): Boolean {
                 return oldItem.uuid == newItem.uuid
             }
 
-            override fun areContentsTheSame(oldItem: NetworkWeaponData, newItem: NetworkWeaponData): Boolean {
+            override fun areContentsTheSame(oldItem: Weapon, newItem: Weapon): Boolean {
                 return oldItem == newItem
             }
         }

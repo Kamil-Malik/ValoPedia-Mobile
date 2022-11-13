@@ -1,51 +1,31 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <string name="app_name">Valorant Gamepedia</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
 
     <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
     <string name="agent">Agent</string>
-    <string name="buddies">Buddies</string>
-    <string name="cards">Cards</string>
     <string name="currencies">Currencies</string>
-    <string name="game_mode">Game Mode</string>
     <string name="maps">Maps</string>
-    <string name="seasons">Seasons</string>
-    <string name="titles">Titles</string>
     <string name="weapons">Weapons</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="this_tab_is_under_development_please_wait_for_further_information">This tab is under development, please wait for further information</string>
     <string name="dummy_role_description">Initiators challenge angles by setting up their team to enter contested ground and push defenders away.</string>
     <string name="dummy_agent_description">Turkish bounty hunter Fade unleashes the power of raw nightmare to seize enemy secrets. Attuned with terror itself, she hunts down targets and reveals their deepest fears - before crushing them in the dark.</string>
-    <string name="dummy_uuid" tools:ignore="TypographyDashes">dade69b4–4f5a-8528-247b-219e5a1facd6</string>
     <string name="image_of_agent">Image of Agent</string>
     <string name="image_of_agent_s_role">Image of agent\'s role</string>
     <string name="agent_ability">Agent\'s Ability</string>
 
     <string name="weapon_category">%s - %s</string>
-    <string name="agent_passive">Agent\'s Passive</string>
     <string name="agent_role">Agent\'s Role</string>
     <string name="weapon_stat">Weapon Stat</string>
-    <string name="rate_of_fire">Rate of fire\t\t:</string>
 
     <string name="error_connection">Please check your connection</string>
     <string name="error_http">Error %d - %s</string>
 
 
-
-
     //Utility Component
-    <string name="standard_weapon_skin">Standard %s</string>
-    <string name="random_weapon_skin">Random</string>
     <string name="dashboard">Dashboard</string>
-    <string name="fire_rate">Fire Rate</string>
     <string name="weapon_skin">Weapon Skin</string>
-    <string name="rank">Rank</string>
     <string name="agent_tag">Agent\'s Tag</string>
 </resources>

@@ -35,7 +35,7 @@ class MapsFragment : Fragment() {
 
         viewModel.getMaps().observe(viewLifecycleOwner) {
             when (it) {
-                is FinalResponse.GenericException -> Toast.makeText(
+                is FinalResponse.HttpException -> Toast.makeText(
                     context,
                     getString(R.string.error_http, it.code, it.cause),
                     Toast.LENGTH_SHORT
@@ -47,6 +47,8 @@ class MapsFragment : Fragment() {
                     Toast.LENGTH_SHORT
                 ).show()
                 is FinalResponse.Success -> adapter.submitList(it.data)
+                is FinalResponse.GenericException -> Toast.makeText(context, it.cause, Toast.LENGTH_SHORT)
+                    .show()
             }
         }
 

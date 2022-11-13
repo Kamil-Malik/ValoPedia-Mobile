@@ -43,7 +43,7 @@ class AgentsDetailActivity : AppCompatActivity() {
                tvAgentName.text = data.agent.displayName
                tvAgentDescription.text = data.agent.description
                tvAgentRoleTitle.text = data.agent.role.displayName
-               tvAgentRoleDescription.text = data.agent.role.description
+               tvAgentRoleDescription.text = data.agent.role.roleDescription
 
                Glide.with(this@AgentsDetailActivity)
                    .load(data.agent.role.displayIcon)

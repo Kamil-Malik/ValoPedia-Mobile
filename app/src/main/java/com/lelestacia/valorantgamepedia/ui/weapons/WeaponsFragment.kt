@@ -10,7 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lelestacia.valorantgamepedia.R
-import com.lelestacia.valorantgamepedia.data.model.local.weapon_data.entity.Weapon
+import com.lelestacia.valorantgamepedia.data.model.local.weapon.entity.Weapon
 import com.lelestacia.valorantgamepedia.databinding.FragmentWeaponsBinding
 import com.lelestacia.valorantgamepedia.utility.FinalResponse
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,7 +29,7 @@ class WeaponsFragment : Fragment() {
         lifecycleScope.launchWhenCreated {
             viewModel.getWeapons().collect {
                 when (it) {
-                    is FinalResponse.GenericException -> Toast.makeText(
+                    is FinalResponse.HttpException -> Toast.makeText(
                         context,
                         getString(R.string.error_http, it.code, it.cause),
                         Toast.LENGTH_SHORT
@@ -41,6 +41,8 @@ class WeaponsFragment : Fragment() {
                     is FinalResponse.Success -> {
                         setLIstAdapter(it.data)
                     }
+                    is FinalResponse.GenericException -> Toast.makeText(context, it.cause, Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
         }

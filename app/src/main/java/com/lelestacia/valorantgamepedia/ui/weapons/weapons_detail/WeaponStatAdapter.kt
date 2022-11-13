@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.lelestacia.valorantgamepedia.data.model.local.DisplayWeaponStat
+import com.lelestacia.valorantgamepedia.data.model.local.weapon.utility.DisplayWeaponStat
 import com.lelestacia.valorantgamepedia.databinding.ItemWeaponStatBinding
 
 

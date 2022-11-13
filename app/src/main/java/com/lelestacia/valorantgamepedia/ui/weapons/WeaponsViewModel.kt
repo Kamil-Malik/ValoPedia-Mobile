@@ -1,7 +1,7 @@
 package com.lelestacia.valorantgamepedia.ui.weapons
 
 import androidx.lifecycle.ViewModel
-import com.lelestacia.valorantgamepedia.data.model.local.weapon_data.entity.Weapon
+import com.lelestacia.valorantgamepedia.data.model.local.weapon.entity.Weapon
 import com.lelestacia.valorantgamepedia.data.repository.MainRepository
 import com.lelestacia.valorantgamepedia.utility.FinalResponse
 import dagger.hilt.android.lifecycle.HiltViewModel

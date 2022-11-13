@@ -11,10 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.lelestacia.valorantgamepedia.R
-import com.lelestacia.valorantgamepedia.data.model.local.weapon_data.entity.DamageRange
-import com.lelestacia.valorantgamepedia.data.model.local.weapon_data.entity.Weapon
-import com.lelestacia.valorantgamepedia.data.model.local.weapon_data.entity.WeaponSkin
-import com.lelestacia.valorantgamepedia.data.model.local.weapon_data.entity.WeaponStatistic
+import com.lelestacia.valorantgamepedia.data.model.local.weapon.entity.DamageRange
+import com.lelestacia.valorantgamepedia.data.model.local.weapon.entity.Weapon
+import com.lelestacia.valorantgamepedia.data.model.local.weapon.entity.WeaponSkin
+import com.lelestacia.valorantgamepedia.data.model.local.weapon.entity.WeaponStatistic
 import com.lelestacia.valorantgamepedia.databinding.ActivityDetailWeaponBinding
 import com.lelestacia.valorantgamepedia.ui.weapons.WeaponListAdapter
 import com.lelestacia.valorantgamepedia.usecases.DisplayDamageRange
@@ -44,76 +44,6 @@ class DetailWeaponActivity : AppCompatActivity() {
             setRvDamageRange(weaponDetail.damageRange)
             setRvSkin(weaponDetail.skin)
         }
-
-        binding.apply {
-
-            /*if (weapon.networkWeaponStatistic != null) {
-                rvWeaponStat.setHasFixedSize(true)
-                rvWeaponStat.adapter = weaponStatAdapter
-                rvWeaponStat.layoutManager = object : GridLayoutManager(
-                    this@DetailWeaponActivity,
-                    2,
-                    RecyclerView.VERTICAL,
-                    false
-                ) {
-
-                    override fun canScrollVertically(): Boolean {
-                        return false
-                    }
-                }
-
-                rvWeaponDamageRange.setHasFixedSize(true)
-                rvWeaponDamageRange.adapter = weaponDamageAdapter
-                rvWeaponDamageRange.layoutManager = object : GridLayoutManager(
-                    this@DetailWeaponActivity,
-                    weapon.networkWeaponStatistic.networkDamageRanges.size + 1,
-                    RecyclerView.VERTICAL,
-                    false
-                ) {
-                    override fun canScrollVertically(): Boolean {
-                        return  false
-                    }
-                }
-            } else {
-                tvWeaponHeaderStat.visibility = View.GONE
-                rvWeaponStat.visibility = View.GONE
-                rvWeaponDamageRange.visibility = View.GONE
-            }
-
-
-            rvWeaponSkin.setHasFixedSize(true)
-            rvWeaponSkin.adapter = weaponSkinAdapter
-            rvWeaponSkin.layoutManager =
-                GridLayoutManager(this@DetailWeaponActivity, 3, RecyclerView.HORIZONTAL, false)
-
-            Glide.with(this@DetailWeaponActivity)
-                .load(weapon.displayIcon)
-                .placeholder(R.drawable.ic_placeholder)
-                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
-                .error(R.drawable.ic_broken_image)
-                .into(ivWeaponIcon)
-            tvWeaponTitle.text = weapon.displayName
-
-
-            val fixedList = weapon.networkSkins
-                .filter { it.displayIcon != null }
-                .filter {
-                    it.displayName != getString(
-                        R.string.standard_weapon_skin,
-                        weapon.displayName
-                    )
-                }
-                .filterNot { it.displayName.contains("Random") }
-                .sortedBy { it.displayName }
-            weaponSkinAdapter.submitList(fixedList)
-
-            if (weapon.networkWeaponStatistic != null) {
-                weaponStatAdapter.submitList(WeaponStat().get(weapon.networkWeaponStatistic))
-                val weaponDamageRangeValue =
-                    WeaponDamageRange().get(weapon.networkWeaponStatistic.networkDamageRanges)
-                weaponDamageAdapter.submitList(weaponDamageRangeValue)
-            }*/
-        }
     }
 
     private fun setRvSkin(skin: List<WeaponSkin>) {
@@ -128,7 +58,6 @@ class DetailWeaponActivity : AppCompatActivity() {
                     .filter { it.displayIcon.isNotEmpty() }
                     .filterNot { it.displayName.contains("Random") }
                     .sortedBy { it.displayName }
-                    .toList()
                 weaponSkinAdapter.submitList(displayList)
             } else {
                 tvHeaderWeaponSkin.visibility = View.GONE
@@ -138,11 +67,11 @@ class DetailWeaponActivity : AppCompatActivity() {
     }
 
     private fun setRvDamageRange(damageRange: List<DamageRange>) {
-        val weaponDamageAdapter = WeaponDamageAdapter()
+        val damageRangeAdapter = DamageRangeAdapter()
         binding.apply {
             if (damageRange.isNotEmpty()) {
                 rvWeaponDamageRange.setHasFixedSize(true)
-                rvWeaponDamageRange.adapter = weaponDamageAdapter
+                rvWeaponDamageRange.adapter = damageRangeAdapter
                 rvWeaponDamageRange.layoutManager = object : GridLayoutManager(
                     this@DetailWeaponActivity,
                     damageRange.size + 1,
@@ -153,7 +82,7 @@ class DetailWeaponActivity : AppCompatActivity() {
                         return false
                     }
                 }
-                weaponDamageAdapter.submitList(DisplayDamageRange().get(damageRange))
+                damageRangeAdapter.submitList(DisplayDamageRange().get(damageRange))
             } else rvWeaponDamageRange.visibility = View.GONE
         }
     }

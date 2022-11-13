@@ -3,7 +3,7 @@ package com.lelestacia.valorantgamepedia.ui.maps
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
-import com.lelestacia.valorantgamepedia.data.model.local.maps_data.entity.Map
+import com.lelestacia.valorantgamepedia.data.model.local.maps.entity.Map
 import com.lelestacia.valorantgamepedia.data.repository.MainRepository
 import com.lelestacia.valorantgamepedia.utility.FinalResponse
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -16,11 +16,6 @@
         android:label="@string/agent"
         tools:layout="@layout/fragment_agents" />
     <fragment
-        android:id="@+id/nav_currencies"
-        android:name="com.lelestacia.valorantgamepedia.ui.currencies.CurrenciesFragment"
-        android:label="@string/currencies"
-        tools:layout="@layout/fragment_currencies" />
-    <fragment
         android:id="@+id/nav_maps"
         android:name="com.lelestacia.valorantgamepedia.ui.maps.MapsFragment"
         android:label="@string/maps"

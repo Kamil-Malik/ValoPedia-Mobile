@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.lelestacia.valorantgamepedia.R
-import com.lelestacia.valorantgamepedia.data.model.local.agent_data.entities.Ability
+import com.lelestacia.valorantgamepedia.data.model.local.agent.entities.Ability
 import com.lelestacia.valorantgamepedia.databinding.ItemSkillActiveBinding
 import com.lelestacia.valorantgamepedia.databinding.ItemSkillPassiveBinding
 import com.lelestacia.valorantgamepedia.usecases.SkillType

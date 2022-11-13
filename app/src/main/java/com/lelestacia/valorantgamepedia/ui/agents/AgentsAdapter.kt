@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.lelestacia.valorantgamepedia.R
-import com.lelestacia.valorantgamepedia.data.model.local.agent_data.entities.Agent
+import com.lelestacia.valorantgamepedia.data.model.local.agent.entities.Agent
 import com.lelestacia.valorantgamepedia.databinding.ItemAgentBinding
 import com.lelestacia.valorantgamepedia.ui.agents.agents_detail.AgentsDetailActivity
 

@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.lelestacia.valorantgamepedia.R
-import com.lelestacia.valorantgamepedia.data.model.local.weapon_data.entity.Weapon
+import com.lelestacia.valorantgamepedia.data.model.local.weapon.entity.Weapon
 import com.lelestacia.valorantgamepedia.databinding.ItemWeaponBinding
 import com.lelestacia.valorantgamepedia.ui.weapons.weapons_detail.DetailWeaponActivity
 

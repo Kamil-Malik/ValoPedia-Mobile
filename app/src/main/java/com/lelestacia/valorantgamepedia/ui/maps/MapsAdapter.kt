@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.lelestacia.valorantgamepedia.R
-import com.lelestacia.valorantgamepedia.data.model.local.maps_data.entity.Map
+import com.lelestacia.valorantgamepedia.data.model.local.maps.entity.Map
 import com.lelestacia.valorantgamepedia.databinding.ItemMapBinding
 
 class MapsAdapter : ListAdapter<Map, MapsAdapter.ViewHolder>(DIFF_CALLBACK) {

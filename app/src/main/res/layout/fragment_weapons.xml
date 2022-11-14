@@ -12,4 +12,9 @@
         android:paddingBottom="8dp"
         tools:listitem="@layout/item_weapon" />
 
+    <include
+        tools:visibility="gone"
+        android:id="@+id/screen_loading"
+        layout="@layout/screen_loading" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

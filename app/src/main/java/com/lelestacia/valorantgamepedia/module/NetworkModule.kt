@@ -1,7 +1,8 @@
 package com.lelestacia.valorantgamepedia.module
 
 import androidx.viewbinding.BuildConfig
-import com.lelestacia.valorantgamepedia.data.api.ValorantApi
+import com.lelestacia.valorantgamepedia.data.data_source.api.HendrikDevApi
+import com.lelestacia.valorantgamepedia.data.data_source.api.ValorantApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -37,4 +38,12 @@ object NetworkModule {
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build().create(ValorantApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideHendrikApi(okHttpClient: OkHttpClient): HendrikDevApi =
+        Retrofit.Builder().baseUrl(HendrikDevApi.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(okHttpClient)
+            .build().create(HendrikDevApi::class.java)
 }

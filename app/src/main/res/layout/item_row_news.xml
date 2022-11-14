@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:background="@android:color/transparent"
+    app:cardCornerRadius="15dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="16dp">
+
+        <ImageView
+            android:id="@+id/iv_banner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/news_banner"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/dummy_weapon" />
+
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/progress_news"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            app:indicatorColor="@color/yellow_loading"
+            app:indicatorDirectionLinear="startToEnd"
+            app:layout_constraintTop_toBottomOf="@id/iv_banner"
+            app:trackCornerRadius="10dp" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/sen_bold"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@id/iv_banner"
+            tools:text="Watch Game Changers Championship. Earn Drops." />
+
+        <TextView
+            android:id="@+id/tv_timestamp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/sen"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@id/tv_title"
+            tools:text="2022-11-08T15:00:00.000Z" />
+
+<!--        <ImageView-->
+<!--            android:id="@+id/btn_share"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:background="@android:color/transparent"-->
+<!--            android:src="@drawable/ic_share"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/tv_timestamp"-->
+<!--            app:tint="?attr/tint" />-->
+
+<!--        <ImageView-->
+<!--            android:id="@+id/btn_external"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginEnd="12dp"-->
+<!--            android:background="@android:color/transparent"-->
+<!--            android:src="@drawable/ic_open_external"-->
+<!--            app:layout_constraintEnd_toStartOf="@id/btn_share"-->
+<!--            app:layout_constraintTop_toTopOf="@id/btn_share"-->
+<!--            app:tint="?attr/tint" />-->
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

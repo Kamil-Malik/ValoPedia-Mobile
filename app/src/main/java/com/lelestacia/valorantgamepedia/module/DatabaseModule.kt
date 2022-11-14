@@ -2,7 +2,7 @@ package com.lelestacia.valorantgamepedia.module
 
 import android.content.Context
 import androidx.room.Room
-import com.lelestacia.valorantgamepedia.data.local.LocalDatabase
+import com.lelestacia.valorantgamepedia.data.data_source.local.LocalDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    android:padding="4dp">
+
+    <ProgressBar
+        android:id="@+id/circular_progress"
+        android:layout_width="@dimen/_35sdp"
+        android:layout_height="@dimen/_35sdp"
+        android:indeterminateTint="@color/yellow_loading"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_agent_icon"
+        app:layout_constraintEnd_toEndOf="@+id/iv_agent_icon"
+        app:layout_constraintStart_toStartOf="@+id/iv_agent_icon"
+        app:layout_constraintTop_toTopOf="@+id/iv_agent_icon" />
+
+    <ImageView
+        android:id="@+id/iv_agent_icon"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:contentDescription="@string/image_of_agent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_agent_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/sen_extrabold"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@id/iv_agent_icon"
+        app:layout_constraintTop_toTopOf="@id/iv_agent_icon"
+        tools:text="Agent Name" />
+
+    <ImageView
+        android:id="@+id/iv_agent_role"
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/image_of_agent_s_role"
+        app:layout_constraintBottom_toBottomOf="@id/iv_agent_icon"
+        app:layout_constraintStart_toStartOf="@id/tv_agent_name"
+        app:layout_constraintTop_toBottomOf="@id/tv_agent_name"
+        app:tint="?iconTint"
+        tools:src="@drawable/ic_broken_image" />
+
+    <TextView
+        android:id="@+id/tv_agent_role_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/sen"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/iv_agent_role"
+        app:layout_constraintStart_toEndOf="@id/iv_agent_role"
+        app:layout_constraintTop_toTopOf="@id/iv_agent_role"
+        tools:text="Initiator" />
+</androidx.constraintlayout.widget.ConstraintLayout>

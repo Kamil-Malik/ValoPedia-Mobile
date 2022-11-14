@@ -13,4 +13,9 @@
        android:paddingTop="8dp"
        android:paddingBottom="8dp"/>
 
+   <include
+       tools:visibility="gone"
+       android:id="@+id/screen_loading"
+       layout="@layout/screen_loading" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

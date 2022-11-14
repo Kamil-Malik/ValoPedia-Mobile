@@ -28,4 +28,8 @@
     <string name="dashboard">Dashboard</string>
     <string name="weapon_skin">Weapon Skin</string>
     <string name="agent_tag">Agent\'s Tag</string>
+    <string name="loading">Loading…</string>
+    <string name="news_banner">News Banner</string>
+    <string name="button_share">Button Share</string>
+    <string name="button_external">Button External</string>
 </resources>

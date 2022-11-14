@@ -16,14 +16,14 @@
         android:theme="@style/Theme.ValorantGamepedia"
         tools:targetApi="31">
         <activity
-            android:name=".ui.weapons.weapons_detail.DetailWeaponActivity"
+            android:name=".ui.activity.DetailWeaponActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.agents.agents_detail.AgentsDetailActivity"
+            android:name=".ui.activity.AgentsDetailActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">
@@ -32,7 +32,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".ui.activity.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.ValorantGamepedia.NoActionBar"

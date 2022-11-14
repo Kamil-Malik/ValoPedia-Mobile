@@ -9,4 +9,7 @@
     <color name="red">#f84554</color>
     <color name="grey">#616161</color>
     <color name="broken_white">#EDEDED</color>
+    <color name="dark_grey">#1F1F1F</color>
+    <color name="yellow_loading">#ffbf00</color>
+    <color name="yellow_background_loading">#FFE9A5</color>
 </resources>

@@ -1,6 +1,6 @@
 package com.lelestacia.valorantgamepedia.data.remote
 
-import com.lelestacia.valorantgamepedia.data.api.ValorantApi
+import com.lelestacia.valorantgamepedia.data.data_source.api.ValorantApi
 import com.lelestacia.valorantgamepedia.data.model.remote.agent.NetworkAgent
 import com.lelestacia.valorantgamepedia.data.model.remote.maps.NetworkMap
 import com.lelestacia.valorantgamepedia.data.model.remote.weapon.NetworkWeapon

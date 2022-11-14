@@ -2,8 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="?attr/backgroundColor"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="?attr/backgroundColor">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_agents"
@@ -11,6 +11,11 @@
         android:layout_height="match_parent"
         android:paddingTop="8dp"
         android:paddingBottom="8dp"
-        tools:listitem="@layout/item_agent" />
+        tools:listitem="@layout/item_row_agent" />
+
+    <include
+        tools:visibility="gone"
+        android:id="@+id/screen_loading"
+        layout="@layout/screen_loading" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

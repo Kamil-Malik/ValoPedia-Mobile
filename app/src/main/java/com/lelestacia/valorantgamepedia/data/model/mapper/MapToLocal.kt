@@ -4,9 +4,11 @@ import com.lelestacia.valorantgamepedia.data.model.local.agent.entities.Ability
 import com.lelestacia.valorantgamepedia.data.model.local.agent.entities.Agent
 import com.lelestacia.valorantgamepedia.data.model.local.agent.entities.Role
 import com.lelestacia.valorantgamepedia.data.model.local.maps.entity.Map
+import com.lelestacia.valorantgamepedia.data.model.local.news.entity.News
 import com.lelestacia.valorantgamepedia.data.model.local.weapon.entity.*
 import com.lelestacia.valorantgamepedia.data.model.remote.agent.NetworkAgent
 import com.lelestacia.valorantgamepedia.data.model.remote.maps.NetworkMap
+import com.lelestacia.valorantgamepedia.data.model.remote.news.NetworkNews
 import com.lelestacia.valorantgamepedia.data.model.remote.weapon.NetworkWeapon
 import kotlinx.coroutines.*
 
@@ -79,6 +81,18 @@ class MapToLocal {
             displayCoordinate = networkMap.coordinate,
             displayIcon = networkMap.displayIcon ?: "",
             splashIcon = networkMap.splash
+        )
+    }
+
+    fun news(networkNews: NetworkNews): News {
+        return News(
+            id = 0,
+            bannerUrl = networkNews.bannerUrl,
+            category = networkNews.category,
+            date = networkNews.date,
+            externalLink = networkNews.externalLink ?: "",
+            title = networkNews.title,
+            url = networkNews.url
         )
     }
 

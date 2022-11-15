@@ -1,7 +1,7 @@
 package com.lelestacia.valorantgamepedia.usecases
 
-import com.lelestacia.valorantgamepedia.data.model.local.weapon.utility.DisplayWeaponStat
 import com.lelestacia.valorantgamepedia.data.model.local.weapon.entity.WeaponStatistic
+import com.lelestacia.valorantgamepedia.data.model.local.weapon.utility.DisplayWeaponStat
 
 class DisplayStatistic {
 

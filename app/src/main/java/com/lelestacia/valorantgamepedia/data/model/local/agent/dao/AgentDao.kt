@@ -9,12 +9,12 @@ import com.lelestacia.valorantgamepedia.data.model.local.agent.relation.AgentWit
 interface AgentDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAgent(agent: Agent)
+    suspend fun insertListOfAgent(agent: List<Agent>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAbility(ability: Ability)
+    suspend fun insertListOfAbility(ability: List<Ability>)
 
-    @Query("SELECT * FROM agent_table")
+    @Query("SELECT * FROM agent_table ORDER BY name")
     fun getListOfAgents(): List<Agent>
 
     @Transaction

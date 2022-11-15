@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.lelestacia.valorantgamepedia.databinding.ActivityAgentsDetailBinding
 import com.lelestacia.valorantgamepedia.ui.adapter.AgentSkillAdapter
 import com.lelestacia.valorantgamepedia.ui.adapter.AgentTagAdapter
-import com.lelestacia.valorantgamepedia.databinding.ActivityAgentsDetailBinding
 import com.lelestacia.valorantgamepedia.ui.adapter.AgentsAdapter
 import com.lelestacia.valorantgamepedia.ui.viewmodel.AgentDetailViewModel
 import dagger.hilt.android.AndroidEntryPoint

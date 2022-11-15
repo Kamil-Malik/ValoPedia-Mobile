@@ -7,7 +7,7 @@ import com.lelestacia.valorantgamepedia.data.model.local.maps.entity.Map
 interface MapDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(map: Map)
+    suspend fun insertListOfMap(map: List<Map>)
 
     @Query("Select * from map_table ORDER BY name")
     fun getMap(): List<Map>

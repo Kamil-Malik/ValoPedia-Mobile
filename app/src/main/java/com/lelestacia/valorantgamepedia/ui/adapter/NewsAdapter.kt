@@ -4,8 +4,8 @@ import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -13,18 +13,17 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
-import com.lelestacia.valorantgamepedia.R
-import com.lelestacia.valorantgamepedia.data.model.remote.news.NetworkNews
+import com.lelestacia.valorantgamepedia.data.model.local.news.entity.News
 import com.lelestacia.valorantgamepedia.databinding.ItemRowNewsBinding
 import com.lelestacia.valorantgamepedia.utility.DateFormatter
 import java.util.*
 
-class NewsAdapter : ListAdapter<NetworkNews, NewsAdapter.ViewHolder>(DIFF_CALLBACK) {
+class NewsAdapter : PagingDataAdapter<News, NewsAdapter.ViewHolder>(DIFF_CALLBACK) {
 
     inner class ViewHolder(private val binding: ItemRowNewsBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: NetworkNews) {
+        fun bind(item: News) {
             binding.apply {
                 Glide.with(itemView.context)
                     .load(item.bannerUrl)
@@ -34,7 +33,10 @@ class NewsAdapter : ListAdapter<NetworkNews, NewsAdapter.ViewHolder>(DIFF_CALLBA
                             model: Any?,
                             target: Target<Drawable>?,
                             isFirstResource: Boolean
-                        ): Boolean = false
+                        ): Boolean {
+                            progressNews.visibility = View.VISIBLE
+                            return false
+                        }
 
                         override fun onResourceReady(
                             resource: Drawable?,
@@ -49,22 +51,12 @@ class NewsAdapter : ListAdapter<NetworkNews, NewsAdapter.ViewHolder>(DIFF_CALLBA
                     })
                     .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                     .fitCenter()
-                    .error(R.drawable.ic_broken_image)
                     .into(ivBanner)
 
                 tvTitle.text = item.title
                 tvTimestamp.text = DateFormatter().format(
                     item.date, TimeZone.getDefault().id
                 )
-
-//                btnShare.setOnClickListener {
-//                    val intent = Intent(Intent.ACTION_SEND).apply {
-//                        type = "text/plain"
-//                        putExtra(Intent.EXTRA_SUBJECT, "Valopedia News")
-//                        putExtra(Intent.EXTRA_TEXT, item.externalLink ?: item.url)
-//                    }
-//                    itemView.context.startActivity(intent)
-//                }
             }
         }
     }
@@ -80,11 +72,11 @@ class NewsAdapter : ListAdapter<NetworkNews, NewsAdapter.ViewHolder>(DIFF_CALLBA
     }
 
     companion object {
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<NetworkNews>() {
-            override fun areItemsTheSame(oldItem: NetworkNews, newItem: NetworkNews): Boolean =
-                oldItem == newItem
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<News>() {
+            override fun areItemsTheSame(oldItem: News, newItem: News): Boolean =
+                oldItem.id == newItem.id
 
-            override fun areContentsTheSame(oldItem: NetworkNews, newItem: NetworkNews): Boolean =
+            override fun areContentsTheSame(oldItem: News, newItem: News): Boolean =
                 oldItem == newItem
         }
     }

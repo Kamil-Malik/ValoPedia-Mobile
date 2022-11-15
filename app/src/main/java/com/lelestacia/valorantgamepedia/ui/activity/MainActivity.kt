@@ -1,7 +1,9 @@
 package com.lelestacia.valorantgamepedia.ui.activity
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -11,21 +13,24 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import com.lelestacia.valorantgamepedia.R
 import com.lelestacia.valorantgamepedia.databinding.ActivityMainBinding
+import com.lelestacia.valorantgamepedia.ui.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
+    private val viewModel by viewModels<HomeViewModel>()
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        installSplashScreen().setKeepOnScreenCondition {
+            viewModel.isValidated.value == null
+        }
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
         setSupportActionBar(binding.appBarMain.toolbar)
+        setContentView(binding.root)
 
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView

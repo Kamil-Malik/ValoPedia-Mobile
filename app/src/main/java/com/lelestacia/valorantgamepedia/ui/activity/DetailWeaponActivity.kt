@@ -11,12 +11,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.lelestacia.valorantgamepedia.R
-import com.lelestacia.valorantgamepedia.ui.adapter.DamageRangeAdapter
 import com.lelestacia.valorantgamepedia.data.model.local.weapon.entity.DamageRange
 import com.lelestacia.valorantgamepedia.data.model.local.weapon.entity.Weapon
 import com.lelestacia.valorantgamepedia.data.model.local.weapon.entity.WeaponSkin
 import com.lelestacia.valorantgamepedia.data.model.local.weapon.entity.WeaponStatistic
 import com.lelestacia.valorantgamepedia.databinding.ActivityDetailWeaponBinding
+import com.lelestacia.valorantgamepedia.ui.adapter.DamageRangeAdapter
 import com.lelestacia.valorantgamepedia.ui.adapter.WeaponListAdapter
 import com.lelestacia.valorantgamepedia.ui.adapter.WeaponSkinAdapter
 import com.lelestacia.valorantgamepedia.ui.adapter.WeaponStatAdapter

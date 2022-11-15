@@ -8,6 +8,7 @@ import com.lelestacia.valorantgamepedia.data.model.local.maps.dao.MapDao
 import com.lelestacia.valorantgamepedia.data.model.local.maps.entity.Map
 import com.lelestacia.valorantgamepedia.data.model.local.weapon.dao.WeaponDao
 import com.lelestacia.valorantgamepedia.data.model.local.weapon.entity.Weapon
+import com.lelestacia.valorantgamepedia.data.model.local.weapon.entity.WeaponStatistic
 import com.lelestacia.valorantgamepedia.data.model.local.weapon.relation.WeaponDataWithDamageRangeAndSkin
 import com.lelestacia.valorantgamepedia.data.model.mapper.MapToLocal
 import com.lelestacia.valorantgamepedia.data.remote.ValorantApiSource
@@ -45,11 +46,11 @@ class ValorantRepositoryImpl @Inject constructor(
             val apiResponse = apiService.getAgents()
             val agent = apiResponse
                 .map { MapToLocal().agent(it) }
-                .onEach { agentDao.insertAgent(it) }
+                .also { agentDao.insertListOfAgent(it) }
             apiResponse
                 .map { MapToLocal().ability(it, coroutineDispatcher) }
                 .flatten()
-                .onEach { agentDao.insertAbility(it) }
+                .also { agentDao.insertListOfAbility(it) }
 
             isAgentUpdated = !isAgentUpdated
             if (localData != agent)
@@ -89,7 +90,7 @@ class ValorantRepositoryImpl @Inject constructor(
             val apiResponse = apiService
                 .getMaps()
                 .map { MapToLocal().map(it) }
-                .onEach { mapDao.insert(it) }
+                .also { mapDao.insertListOfMap(it) }
 
             isMapUpdated = !isMapUpdated
             if (localData != apiResponse)
@@ -122,22 +123,19 @@ class ValorantRepositoryImpl @Inject constructor(
             val apiResponse = apiService.getWeapons()
             val weapon = apiResponse
                 .map { MapToLocal().weapon(it) }
-                .onEach { weaponDao.insertWeaponData(it) }
+                .also { weaponDao.insertListOFWeaponData(it) }
             apiResponse
                 .map { MapToLocal().skin(it, coroutineDispatcher) }
                 .flatten()
-                .forEach { weaponDao.insertWeaponSkin(it) }
+                .also { weaponDao.insertListOfWeaponSkin(it) }
             apiResponse
                 .map { MapToLocal().damageRange(it, coroutineDispatcher) }
                 .flatten()
-                .forEach { weaponDao.insertDamageRange(it) }
+                .also { weaponDao.insertListOfDamageRange(it) }
             apiResponse
                 .map {
                     MapToLocal().statistic(it)
-                }.forEach {
-                    if (it != null)
-                        weaponDao.insertWeaponStat(it)
-                }
+                }.also { weaponDao.insertListOfWeaponStatistic(it as List<WeaponStatistic>) }
 
             isWeaponUpdated = !isWeaponUpdated
             if (localData != weapon)

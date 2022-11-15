@@ -6,11 +6,11 @@ import com.lelestacia.valorantgamepedia.data.data_source.api.ValorantApi
 import com.lelestacia.valorantgamepedia.data.data_source.local.LocalDatabase
 import com.lelestacia.valorantgamepedia.data.remote.ValorantApiSource
 import com.lelestacia.valorantgamepedia.data.repository.contract.HendrikDevRepository
-import com.lelestacia.valorantgamepedia.data.repository.contract.ValorantRepository
-import com.lelestacia.valorantgamepedia.data.repository.implementation.ValorantRepositoryImpl
 import com.lelestacia.valorantgamepedia.data.repository.contract.SharedPrefRepository
+import com.lelestacia.valorantgamepedia.data.repository.contract.ValorantRepository
 import com.lelestacia.valorantgamepedia.data.repository.implementation.HendrikDevRepositoryImpl
 import com.lelestacia.valorantgamepedia.data.repository.implementation.SharedPrefRepositoryImpl
+import com.lelestacia.valorantgamepedia.data.repository.implementation.ValorantRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -43,6 +43,6 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideHendrikDevRepository(apiService: HendrikDevApi) : HendrikDevRepository =
-        HendrikDevRepositoryImpl(apiService)
+    fun provideHendrikDevRepository(apiService: HendrikDevApi, localDatabase: LocalDatabase) : HendrikDevRepository =
+        HendrikDevRepositoryImpl(apiService, localDatabase, Dispatchers.IO)
 }

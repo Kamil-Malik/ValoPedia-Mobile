@@ -3,14 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    android:background="?attr/backgroundColor"
     tools:context=".ui.activity.AgentsDetailActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/backgroundColor"
-        android:padding="16dp">
+        android:background="?attr/backgroundColor">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_back" />
 
         <ImageView
             android:id="@+id/iv_agent_photo"
@@ -18,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:contentDescription="@string/image_of_agent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
             tools:src="@drawable/fullportrait"
             tools:visibility="gone" />
 
@@ -39,9 +47,9 @@
             android:id="@+id/tv_agent_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="16dp"
             android:fontFamily="@font/sen"
             android:textAlignment="center"
             android:textColor="?android:attr/textColorPrimary"
@@ -64,18 +72,22 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_agent_tag"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="@+id/tv_agent_description"
+            app:layout_constraintStart_toStartOf="@+id/tv_agent_description"
             app:layout_constraintTop_toBottomOf="@id/tv_header_tag"
             tools:itemCount="3"
             tools:listitem="@layout/item_agent_tag" />
 
         <Space
             android:id="@+id/spacer_tag"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/tv_agent_description"
+            app:layout_constraintStart_toStartOf="@+id/tv_agent_description"
             app:layout_constraintTop_toBottomOf="@id/rv_agent_tag" />
 
         <TextView
@@ -92,13 +104,13 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_agent_roles"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
             android:background="?attr/cardBackgroundColor"
             app:cardCornerRadius="15dp"
+            app:layout_constraintEnd_toEndOf="@+id/tv_agent_description"
+            app:layout_constraintStart_toStartOf="@+id/tv_agent_description"
             app:layout_constraintTop_toBottomOf="@id/tv_header_role">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -166,15 +178,19 @@
             android:id="@+id/rv_agent_skill"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
             android:orientation="horizontal"
             app:layout_constraintTop_toBottomOf="@id/tv_agent_ability_header"
             tools:itemCount="1"
             tools:listitem="@layout/item_skill_active" />
 
         <Space
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="24dp"
+            app:layout_constraintEnd_toEndOf="@+id/rv_agent_skill"
+            app:layout_constraintStart_toStartOf="@+id/rv_agent_skill"
             app:layout_constraintTop_toBottomOf="@id/rv_agent_skill" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

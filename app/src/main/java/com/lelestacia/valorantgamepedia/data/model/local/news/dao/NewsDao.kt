@@ -10,9 +10,12 @@ import com.lelestacia.valorantgamepedia.data.model.local.news.entity.News
 @Dao
 interface NewsDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertListOfNews(news: List<News>)
 
     @Query("SELECT * FROM news_table ORDER BY timestamp DESC")
-    fun getAllStory() : PagingSource<Int, News>
+    fun getAllNews(): List<News>
+
+    @Query("SELECT * FROM news_table ORDER BY timestamp DESC")
+    fun getPagingNews() : PagingSource<Int, News>
 }

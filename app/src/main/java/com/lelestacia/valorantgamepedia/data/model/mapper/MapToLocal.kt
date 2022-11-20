@@ -86,7 +86,6 @@ class MapToLocal {
 
     fun news(networkNews: NetworkNews): News {
         return News(
-            id = 0,
             bannerUrl = networkNews.bannerUrl,
             category = networkNews.category,
             date = networkNews.date,

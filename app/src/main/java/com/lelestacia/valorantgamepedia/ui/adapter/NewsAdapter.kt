@@ -74,7 +74,7 @@ class NewsAdapter : PagingDataAdapter<News, NewsAdapter.ViewHolder>(DIFF_CALLBAC
     companion object {
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<News>() {
             override fun areItemsTheSame(oldItem: News, newItem: News): Boolean =
-                oldItem.id == newItem.id
+                oldItem.bannerUrl == newItem.bannerUrl
 
             override fun areContentsTheSame(oldItem: News, newItem: News): Boolean =
                 oldItem == newItem

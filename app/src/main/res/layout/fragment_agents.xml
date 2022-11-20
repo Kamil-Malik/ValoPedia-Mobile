@@ -9,13 +9,6 @@
         android:id="@+id/rv_agents"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
         tools:listitem="@layout/item_row_agent" />
-
-    <include
-        tools:visibility="gone"
-        android:id="@+id/screen_loading"
-        layout="@layout/screen_loading" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

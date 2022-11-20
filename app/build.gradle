@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-kapt'
     id 'com.google.dagger.hilt.android'
     id 'kotlin-parcelize'
+    id 'androidx.navigation.safeargs'
 }
 
 android {
@@ -55,6 +56,7 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
     implementation 'androidx.core:core-splashscreen:1.0.0'
+    implementation 'com.github.kirich1409:viewbindingpropertydelegate:1.5.6'
 
     //Dagger hilt
     implementation 'com.google.dagger:hilt-android:2.44'
@@ -92,4 +94,13 @@ dependencies {
 
     //Paging
     implementation 'androidx.paging:paging-runtime:3.1.1'
+
+    //Epoxy
+    implementation "com.airbnb.android:epoxy:5.1.1"
+    kapt "com.airbnb.android:epoxy-processor:5.1.1"
+    implementation "com.airbnb.android:epoxy-paging3:5.1.1"
+}
+
+kapt {
+    correctErrorTypes = true
 }

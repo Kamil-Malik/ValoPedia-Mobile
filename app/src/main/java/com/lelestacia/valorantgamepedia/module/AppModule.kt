@@ -3,7 +3,8 @@ package com.lelestacia.valorantgamepedia.module
 import android.content.Context
 import com.lelestacia.valorantgamepedia.data.data_source.api.HendrikDevApi
 import com.lelestacia.valorantgamepedia.data.data_source.api.ValorantApi
-import com.lelestacia.valorantgamepedia.data.data_source.local.LocalDatabase
+import com.lelestacia.valorantgamepedia.data.data_source.local.NewsDatabase
+import com.lelestacia.valorantgamepedia.data.data_source.local.WikipediaDatabase
 import com.lelestacia.valorantgamepedia.data.remote.ValorantApiSource
 import com.lelestacia.valorantgamepedia.data.repository.contract.HendrikDevRepository
 import com.lelestacia.valorantgamepedia.data.repository.contract.SharedPrefRepository
@@ -32,9 +33,9 @@ object AppModule {
     @Singleton
     fun provideMainRepository(
         valorantApi: ValorantApiSource,
-        localDatabase: LocalDatabase
+        wikipediaDatabase: WikipediaDatabase
     ): ValorantRepository =
-        ValorantRepositoryImpl(valorantApi, Dispatchers.IO, localDatabase)
+        ValorantRepositoryImpl(valorantApi, Dispatchers.IO, wikipediaDatabase)
 
     @Provides
     @Singleton
@@ -43,6 +44,6 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideHendrikDevRepository(apiService: HendrikDevApi, localDatabase: LocalDatabase) : HendrikDevRepository =
-        HendrikDevRepositoryImpl(apiService, localDatabase, Dispatchers.IO)
+    fun provideHendrikDevRepository(apiService: HendrikDevApi, newsDatabase: NewsDatabase) : HendrikDevRepository =
+        HendrikDevRepositoryImpl(apiService, newsDatabase, Dispatchers.IO)
 }

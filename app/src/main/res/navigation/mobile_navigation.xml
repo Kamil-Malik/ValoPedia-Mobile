@@ -14,7 +14,11 @@
         android:id="@+id/nav_agents"
         android:name="com.lelestacia.valorantgamepedia.ui.fragment.AgentsFragment"
         android:label="@string/agent"
-        tools:layout="@layout/fragment_agents" />
+        tools:layout="@layout/fragment_agents" >
+        <action
+            android:id="@+id/list_to_detail"
+            app:destination="@id/agentsDetailActivity" />
+    </fragment>
     <fragment
         android:id="@+id/nav_maps"
         android:name="com.lelestacia.valorantgamepedia.ui.fragment.MapsFragment"
@@ -25,4 +29,13 @@
         android:name="com.lelestacia.valorantgamepedia.ui.fragment.WeaponsFragment"
         android:label="@string/weapons"
         tools:layout="@layout/fragment_weapons" />
+    <activity
+        android:id="@+id/agentsDetailActivity"
+        android:name="com.lelestacia.valorantgamepedia.ui.activity.AgentsDetailActivity"
+        android:label="activity_agents_detail"
+        tools:layout="@layout/activity_agents_detail" >
+        <argument
+            android:name="uuid"
+            app:argType="string" />
+    </activity>
 </navigation>

@@ -2,7 +2,8 @@ package com.lelestacia.valorantgamepedia.module
 
 import android.content.Context
 import androidx.room.Room
-import com.lelestacia.valorantgamepedia.data.data_source.local.LocalDatabase
+import com.lelestacia.valorantgamepedia.data.data_source.local.NewsDatabase
+import com.lelestacia.valorantgamepedia.data.data_source.local.WikipediaDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,11 +17,17 @@ object DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideLocalDatabase(@ApplicationContext mContext: Context): LocalDatabase {
-        return Room.databaseBuilder(
-            mContext,
-            LocalDatabase::class.java,
-            "valopedia_db"
-        ).build()
+    fun provideLocalDatabase(@ApplicationContext mContext: Context): WikipediaDatabase {
+        return Room
+            .databaseBuilder(mContext, WikipediaDatabase::class.java, "main_db")
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideNewsDatabase(@ApplicationContext mContext: Context): NewsDatabase {
+        return Room
+            .databaseBuilder(mContext, NewsDatabase::class.java, "news_db")
+            .build()
     }
 }

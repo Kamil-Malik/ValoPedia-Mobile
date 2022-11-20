@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -14,29 +15,32 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.lelestacia.valorantgamepedia.databinding.ActivityAgentsDetailBinding
 import com.lelestacia.valorantgamepedia.ui.adapter.AgentSkillAdapter
 import com.lelestacia.valorantgamepedia.ui.adapter.AgentTagAdapter
-import com.lelestacia.valorantgamepedia.ui.adapter.AgentsAdapter
 import com.lelestacia.valorantgamepedia.ui.viewmodel.AgentDetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class AgentsDetailActivity : AppCompatActivity() {
 
+    private val args by navArgs<AgentsDetailActivityArgs>()
     private var _binding: ActivityAgentsDetailBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityAgentsDetailBinding.inflate(layoutInflater)
-        supportActionBar?.hide()
+        setSupportActionBar(binding.toolbar)
         window.statusBarColor = ContextCompat.getColor(this@AgentsDetailActivity, color.black)
         setContentView(binding.root)
 
        lifecycleScope.launchWhenCreated {
            val viewModel by viewModels<AgentDetailViewModel>()
-           val key = intent.getStringExtra(AgentsAdapter.AGENT_UUID) ?: ""
-           val data = viewModel.getAgents(key)
+           val data = viewModel.getAgents(args.uuid)
            val agentSkillAdapter = AgentSkillAdapter()
            binding.apply {
+               toolbar.setNavigationOnClickListener {
+                   onBackPressed().also { finish() }
+               }
+
                rvAgentSkill.setHasFixedSize(true)
                rvAgentSkill.adapter = agentSkillAdapter
                rvAgentSkill.layoutManager =

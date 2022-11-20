@@ -1,6 +1,6 @@
 package com.lelestacia.valorantgamepedia.data.repository.implementation
 
-import com.lelestacia.valorantgamepedia.data.data_source.local.LocalDatabase
+import com.lelestacia.valorantgamepedia.data.data_source.local.WikipediaDatabase
 import com.lelestacia.valorantgamepedia.data.model.local.agent.dao.AgentDao
 import com.lelestacia.valorantgamepedia.data.model.local.agent.entities.Agent
 import com.lelestacia.valorantgamepedia.data.model.local.agent.relation.AgentWithAbility
@@ -8,7 +8,6 @@ import com.lelestacia.valorantgamepedia.data.model.local.maps.dao.MapDao
 import com.lelestacia.valorantgamepedia.data.model.local.maps.entity.Map
 import com.lelestacia.valorantgamepedia.data.model.local.weapon.dao.WeaponDao
 import com.lelestacia.valorantgamepedia.data.model.local.weapon.entity.Weapon
-import com.lelestacia.valorantgamepedia.data.model.local.weapon.entity.WeaponStatistic
 import com.lelestacia.valorantgamepedia.data.model.local.weapon.relation.WeaponDataWithDamageRangeAndSkin
 import com.lelestacia.valorantgamepedia.data.model.mapper.MapToLocal
 import com.lelestacia.valorantgamepedia.data.remote.ValorantApiSource
@@ -17,19 +16,19 @@ import com.lelestacia.valorantgamepedia.utility.FinalResponse
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.withContext
+import okio.IOException
 import retrofit2.HttpException
-import java.io.IOException
 import javax.inject.Inject
 
 class ValorantRepositoryImpl @Inject constructor(
     private val apiService: ValorantApiSource,
     private val coroutineDispatcher: CoroutineDispatcher,
-    localDatabase: LocalDatabase
+    wikipediaDatabase: WikipediaDatabase
 ) : ValorantRepository {
 
-    private val mapDao: MapDao = localDatabase.mapDao()
-    private val agentDao: AgentDao = localDatabase.agentDao()
-    private val weaponDao: WeaponDao = localDatabase.weaponDao()
+    private val mapDao: MapDao = wikipediaDatabase.mapDao()
+    private val agentDao: AgentDao = wikipediaDatabase.agentDao()
+    private val weaponDao: WeaponDao = wikipediaDatabase.weaponDao()
 
     private var isAgentUpdated: Boolean = false
     private var isMapUpdated: Boolean = false
@@ -135,7 +134,8 @@ class ValorantRepositoryImpl @Inject constructor(
             apiResponse
                 .map {
                     MapToLocal().statistic(it)
-                }.also { weaponDao.insertListOfWeaponStatistic(it as List<WeaponStatistic>) }
+                }.filterNotNull()
+                .also { weaponDao.insertListOfWeaponStatistic(it) }
 
             isWeaponUpdated = !isWeaponUpdated
             if (localData != weapon)
@@ -154,7 +154,7 @@ class ValorantRepositoryImpl @Inject constructor(
                 is HttpException -> emit(FinalResponse.HttpException(code(), message()))
                 else -> emit(FinalResponse.GenericException(it.message))
             }
-        }.flowOn(coroutineDispatcher)
+        }.flowOn(coroutineDispatcher).buffer()
     }
 
     override suspend fun getWeaponDetail(uuid: String): WeaponDataWithDamageRangeAndSkin {
